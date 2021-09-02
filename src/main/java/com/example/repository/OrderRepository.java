@@ -183,6 +183,12 @@ public class OrderRepository {
 		return order;
 	}
 
+	/**
+	 * Ordersテーブルを主キー検索する.
+	 * 
+	 * @param id 注文ID
+	 * @return 取得された注文情報
+	 */
 	public Order load(Integer id) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(
