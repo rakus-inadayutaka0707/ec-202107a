@@ -16,8 +16,11 @@ public class ConfirmOrderController {
 	private ConfirmOrderService confirmOrderService;
 
 	@RequestMapping("")
-	public String confirmOrder(Integer orderId, Model model) {
-		Order order = confirmOrderService.load(orderId);
+	public String confirmOrder(String orderId, String userId, Model model) {
+		if (userId == null) {
+			return "/toLogin";
+		}
+		Order order = confirmOrderService.load(Integer.parseInt(orderId));
 		model.addAttribute("order", order);
 		return "order_confirm";
 	}
