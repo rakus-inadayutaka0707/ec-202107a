@@ -12,6 +12,12 @@ import com.example.domain.User;
 import com.example.form.RegisterUserForm;
 import com.example.service.RegisterUserService;
 
+/**
+ * ユーザー情報を操作するコントローラークラス.
+ * 
+ * @author kojiro0706
+ *
+ */
 @Controller
 @RequestMapping("/registerUser")
 public class RegisterUserController {
@@ -61,6 +67,6 @@ public class RegisterUserController {
 		BeanUtils.copyProperties(form, user);
 		registerUserService.insert(user);
 
-		return "redirect:/user/toLogin";
+		return "redirect:/login/toLogin";
 	}
 }
