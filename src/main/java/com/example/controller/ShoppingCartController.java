@@ -1,0 +1,79 @@
+package com.example.controller;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.example.domain.Order;
+import com.example.domain.User;
+import com.example.form.ShoppingCartForm;
+import com.example.service.ShoppingCartService;
+
+/**
+ * ショッピングカート表示時に使用するControllerクラス.
+ * 
+ * @author inada
+ *
+ */
+@Controller
+@RequestMapping("/shopping-cart")
+public class ShoppingCartController {
+
+	@Autowired
+	private ShoppingCartService shoppingCartService;
+
+	@Autowired
+	private ShoppingCartForm setUpShoppingCartForm() {
+		return new ShoppingCartForm();
+	}
+
+	@Autowired
+	private HttpSession session;
+
+	/**
+	 * ショッピングカート一覧を表示する.
+	 * 
+	 * @param model ショッピングカートの商品を表示するために使用
+	 * @return ショッピングカート一覧画面
+	 */
+	@RequestMapping("")
+	public String index(Model model) {
+		Order order = shoppingCartService.showItemShoppingCart(1);
+		model.addAttribute("order", order);
+		return "cart_list";
+	}
+
+	/**
+	 * ショッピングカートに商品を追加する.
+	 * 
+	 * @param form   追加したい商品情報
+	 * @param result エラー情報
+	 * @return ショッピングカート一覧画面
+	 */
+	@RequestMapping("/insert")
+	public String addItemShoppingCart(@Validated ShoppingCartForm form, BindingResult result) {
+		if (result.hasErrors()) {
+			return "item_detail";
+		}
+		User user = (User) session.getAttribute("user");
+		shoppingCartService.addShoppingCart(form, user.getId());
+		return "redirect:/shopping-cart";
+	}
+
+	/**
+	 * ショッピングカートの商品を削除する.
+	 * 
+	 * @param orderItemId 削除したい商品ID
+	 * @return ショッピングカート一覧画面
+	 */
+	@RequestMapping("/delete")
+	public String deleteItemShoppingCart(int orderItemId) {
+		shoppingCartService.deleteItemShoppingCart(orderItemId);
+		return "redirect:/shopping-cart";
+	}
+}

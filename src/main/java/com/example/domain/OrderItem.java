@@ -23,6 +23,10 @@ public class OrderItem {
 	private Item item;
 	/** トッピングのリスト */
 	private List<OrderTopping> orderToppingList;
+	
+	public void setCharSize(String size) {
+		this.size = size.charAt(0);
+	}
 
 	public Integer getId() {
 		return id;
