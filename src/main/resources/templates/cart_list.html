@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ピザ屋のネット注文</title>
+	<link th:href="@{/css/bootstrap.css}" href="../static/css/bootstrap.css" rel="stylesheet">
+	<link href="../static/css/piza.css" rel="stylesheet">
+	<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+	<div class="container">
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+						data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="item_list_pizza.html">
+						<!-- 企業ロゴ --> <img alt="main log" th:src="@{/img_noodle/header_logo.png}"
+							src="../static/img_noodle/header_logo.png" height="35">
+					</a>
+				</div>
+
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<p class="navbar-text navbar-right">
+						<a href="cart_list.html" class="navbar-link">ショッピングカート</a>&nbsp;&nbsp;
+						<a href="order_history.html" class="navbar-link">注文履歴</a>&nbsp;&nbsp;
+						<a href="login.html" class="navbar-link">ログイン</a>&nbsp;&nbsp;
+						<a href="item_list_pizza.html" class="navbar-link">ログアウト</a>
+					</p>
+				</div>
+				<!-- /.navbar-collapse -->
+			</div>
+			<!-- /.container-fluid -->
+		</nav>
+
+
+		<!-- table -->
+		<div class="row">
+			<div class="table-responsive col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-sm-10 col-xs-12">
+				<h3 class="text-center">ショッピングカート</h3>
+				<table class="table table-striped item-list-table">
+					<tbody>
+						<tr>
+							<th>
+								<div class="text-center">
+									商品名
+								</div>
+							</th>
+							<th>
+								<div class="text-center">
+									サイズ、価格(税抜)、数量
+								</div>
+							</th>
+							<th>
+								<div class="text-center">
+									トッピング、価格(税抜)
+								</div>
+							</th>
+							<th>
+								<div class="text-center">
+									小計
+								</div>
+							</th>
+							<th>
+							</th>
+						</tr>
+						<tr th:each="orderItem:${order.orderItemList}">
+							<td class="text-center">
+								<div class="center">
+									<img th:src="@{/img_noodle/} + ${orderItem.item.imagePath}"
+										src="../static/img_noodle/1.jpg"
+										class="img-responsive img-rounded item-img-center" width="100" height="300"><br>
+									<span th:text="${orderItem.item.name}">じゃがバターベーコン</span>
+								</div>
+							</td>
+							<td class="text-center">
+								<span class="price" th:text="${orderItem.size}">&nbsp;Ｌ</span>&nbsp;&nbsp;
+								<span th:if="${orderItem.size} == M" th:text="${orderItem.item.priceM}">2,380</span>
+								<span th:if="${orderItem.size} == L" th:text="${orderItem.item.priceL}">2,380</span>円
+								&nbsp;&nbsp;
+								<span th:text="${orderItem.quantity}">1</span>個
+							</td>
+							<td>
+								<ul>
+									<li th:each="topping:${orderItem.orderToppingList}">
+										<span th:text="${topping.topping.name}">ピーマン300円</span>
+									</li>
+								</ul>
+							</td>
+							<td>
+								<div class="text-center">
+									<span th:if="${orderItem.size} == M"
+										th:text="${orderItem.quantity} * ${orderItem.item.priceM} + ${orderItem.quantity} * ${orderItem.orderToppingList.size()} * 200">3,280</span>
+									<span th:if="${orderItem.size} == L"
+										th:text="${orderItem.quantity} * ${orderItem.item.priceL} + ${orderItem.quantity} * ${orderItem.orderToppingList.size()} * 300">3,280</span>円
+								</div>
+							</td>
+							<td>
+								<div class="text-center">
+									<form th:action="@{/shopping-cart/delete}" method="post">
+										<input type="hidden" name="orderItemId" th:value="${orderItem.id}">
+										<button type="submit" class="btn btn-primary">削除</button>
+									</form>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-offset-2 col-xs-8">
+				<div class="form-group text-center">
+					<span>消費税：</span><span id="total-price"
+						th:text="${order.totalPrice} / 10">8,000</span><span>円</span><br>
+					<span>ご注文金額合計：</span><span id="total-price"
+						th:text="${order.totalPrice} + ${order.totalPrice} / 10">38,000</span><span>円 (税込)</span>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-offset-5 col-xs-3">
+				<div class="form-group">
+<<<<<<< HEAD
+					<form action="order_confirm.html">
+=======
+					<form action="order_confirm.html" th;action="@{/confirm-order}">
+						<input type="hidden" name="orderId" th:value="${order.id}">
+						<input type="hidden" name="userId" th:value="${order.userId}">
+>>>>>>> develop
+						<input class="form-control btn btn-warning btn-block" type="submit" value="注文に進む">
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end container -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="../static/js/bootstrap.min.js"></script>
+</body>
+
+</html>
