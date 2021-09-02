@@ -196,30 +196,4 @@ public class OrderRepository {
 		}
 		return orderList;
 	}
-	
-	
-	
-	public Order load(Integer id) {
-		StringBuilder sql = new StringBuilder();
-		sql.append(
-				"SELECT orders.id as orderId, orders.user_id as orderUserId, orders.status as orderStatus, orders.total_price as orderTotalPrice, orders.order_date as orderOrderDate, orders.destination_name as orderDestinationName, orders.destination_email as orderDestinationEmail, orders.destination_zipcode as orderDestinationZipcode, orders.destination_address as orderDestinationAddress, orders.destination_tel as orderDestinationTel, orders.delivery_time as orderDeliveryTime, orders.payment_method as orderPaymentMethod, ");
-		sql.append(
-				"orderItems.id as orderItemId, orderItems.item_id as orderItemItemId, orderItems.order_id as orderItemOrderId, orderItems.quantity as orderItemQuantity, orderItems.size as orderItemSize, ");
-		sql.append(
-				"orderToppings.id as orderToppingId, orderToppings.topping_id as orderToppingToppingId, orderToppings.order_item_id as orderToppingOrderItemId, ");
-		sql.append(
-				"items.id as itemId, items.name as itemName, items.description as itemDescription, items.price_m as itemPriceM, items.price_l as itemPriceL, items.image_path as itemImagePath, items.deleted as itemDeleted, ");
-		sql.append(
-				"toppings.id as toppingId, toppings.name as toppingName, toppings.price_m as toppingPriceM, toppings.price_l as toppingPriceL ");
-		sql.append("FROM orders as " + ORDERTABLE + " ");
-		sql.append("LEFT OUTER JOIN " + ORDERITEMTABLE + " as orderItems ON orders.id = orderItems.order_id ");
-		sql.append("LEFT OUTER JOIN " + ORDERTOPPINGTABLE
-				+ " as orderToppings ON orderItems.id = orderToppings.order_item_id ");
-		sql.append("LEFT OUTER JOIN " + ITEMTABLE + " as items ON orderItems.item_id = items.id ");
-		sql.append("LEFT OUTER JOIN " + TOPPINGTABLE + " as toppings ON orderToppings.topping_id = toppings.id ");
-		sql.append("WHERE orders.id=:id ORDER BY orderItems.id;");
-		SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
-		Order order = template.query(sql.toString(), param, RSE_ORDER);
-		return order;
-	}
 }
