@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -35,6 +37,8 @@ public class OrderRepository {
 	private static final String ORDERTABLE = "orders";
 	private static final String ORDERITEMTABLE = "order_items";
 	private static final String ORDERTOPPINGTABLE = "order_toppings";
+
+	private static final RowMapper<Order> ORDER_ROW_MAPPER = new BeanPropertyRowMapper<>(Order.class);
 
 	private static final ResultSetExtractor<Order> RSE_ORDER = (rs) -> {
 		Order order = new Order();
@@ -180,6 +184,42 @@ public class OrderRepository {
 		String[] keyColumnNames = { "id" };
 		template.update(sql, param, keyHolder, keyColumnNames);
 		order.setId(keyHolder.getKey().intValue());
+		return order;
+	}
+
+	public List<Order> findByUserIdButAfterOrder(int userId) {
+		String sql = "SELECT id,user_id,status,total_price,order_date,destination_name,destination_email,destination_zipcode,destination_address,destination_tel,delivery_time,payment_method FROM orders where user_id = :userId AND status=1 OR status=2 OR status=3 OR status=4 OR status=9;";
+		SqlParameterSource param = new MapSqlParameterSource().addValue("userId", userId);
+		List<Order> orderList = template.query(sql, param, ORDER_ROW_MAPPER);
+		if (orderList.size() == 0) {
+			return null;
+		}
+		return orderList;
+	}
+	
+	
+	
+	public Order load(Integer id) {
+		StringBuilder sql = new StringBuilder();
+		sql.append(
+				"SELECT orders.id as orderId, orders.user_id as orderUserId, orders.status as orderStatus, orders.total_price as orderTotalPrice, orders.order_date as orderOrderDate, orders.destination_name as orderDestinationName, orders.destination_email as orderDestinationEmail, orders.destination_zipcode as orderDestinationZipcode, orders.destination_address as orderDestinationAddress, orders.destination_tel as orderDestinationTel, orders.delivery_time as orderDeliveryTime, orders.payment_method as orderPaymentMethod, ");
+		sql.append(
+				"orderItems.id as orderItemId, orderItems.item_id as orderItemItemId, orderItems.order_id as orderItemOrderId, orderItems.quantity as orderItemQuantity, orderItems.size as orderItemSize, ");
+		sql.append(
+				"orderToppings.id as orderToppingId, orderToppings.topping_id as orderToppingToppingId, orderToppings.order_item_id as orderToppingOrderItemId, ");
+		sql.append(
+				"items.id as itemId, items.name as itemName, items.description as itemDescription, items.price_m as itemPriceM, items.price_l as itemPriceL, items.image_path as itemImagePath, items.deleted as itemDeleted, ");
+		sql.append(
+				"toppings.id as toppingId, toppings.name as toppingName, toppings.price_m as toppingPriceM, toppings.price_l as toppingPriceL ");
+		sql.append("FROM orders as " + ORDERTABLE + " ");
+		sql.append("LEFT OUTER JOIN " + ORDERITEMTABLE + " as orderItems ON orders.id = orderItems.order_id ");
+		sql.append("LEFT OUTER JOIN " + ORDERTOPPINGTABLE
+				+ " as orderToppings ON orderItems.id = orderToppings.order_item_id ");
+		sql.append("LEFT OUTER JOIN " + ITEMTABLE + " as items ON orderItems.item_id = items.id ");
+		sql.append("LEFT OUTER JOIN " + TOPPINGTABLE + " as toppings ON orderToppings.topping_id = toppings.id ");
+		sql.append("WHERE orders.id=:id ORDER BY orderItems.id;");
+		SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
+		Order order = template.query(sql.toString(), param, RSE_ORDER);
 		return order;
 	}
 }
