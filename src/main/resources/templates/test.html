@@ -5,6 +5,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<div th:each="orderItem:${order.orderItemList}">
+	<span th:text="${orderItem.item.name}"></span>
+	<div th:each="orderTopping:${orderItem.orderToppingList}">
+		<span th:text="${orderTopping.topping.name}"></span>
+	</div>
+</div>
 </body>
 </html>
