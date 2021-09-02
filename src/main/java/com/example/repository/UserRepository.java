@@ -13,6 +13,12 @@ import org.springframework.stereotype.Repository;
 
 import com.example.domain.User;
 
+/**
+ * userテーブルを操作するリポジトリクラス.
+ * 
+ * @author kojiro0706
+ *
+ */
 @Repository
 public class UserRepository {
 	
@@ -53,5 +59,24 @@ public class UserRepository {
 		}else {
 			return userList.get(0);
 		}
+	}
+	
+	/**
+	 * メールアドレスとパスワードからユーザー情報を取得する.
+	 * 
+	 * @param email メールアドレス
+	 * @param password　パスワード
+	 * @return ユーザー情報
+	 */
+	public User findByEmailAndPassword(String email,String password) {
+		String sql = "SELECT id,name,email,password,zipcode,address,telephone FROM"
+				+ " users WHERE email=:email AND password=:password";
+		SqlParameterSource param = new MapSqlParameterSource().addValue("email", email).addValue("password",
+				password);
+		List<User> userList = template.query(sql, param,USER_ROW_MAPPER);
+		if(userList.size() == 0) {
+		return null;
+		}
+		return userList.get(0);
 	}
 }
