@@ -1,5 +1,11 @@
 package com.example.form;
 
+/**
+ * ログインする際に使用するフォームクラス.
+ * 
+ * @author kojiro0706
+ *
+ */
 public class LoginForm {
 
 	/**メールアドレス*/

@@ -12,6 +12,12 @@ import com.example.form.LoginForm;
 import com.example.service.LoginService;
 
 
+/**
+ * ユーザー情報を操作するコントローラークラス.
+ * 
+ * @author kojiro0706
+ *
+ */
 @Controller
 @RequestMapping("/login")
 public class LoginController {
@@ -42,7 +48,7 @@ public class LoginController {
 			return toLogin();
 		}
 		session.setAttribute("user", user);
-		return "/showlist";
+		return "item_list_noodle";
 
 	}
 

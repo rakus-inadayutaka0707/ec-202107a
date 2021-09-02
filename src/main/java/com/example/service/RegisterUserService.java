@@ -6,6 +6,12 @@ import org.springframework.stereotype.Service;
 import com.example.domain.User;
 import com.example.repository.UserRepository;
 
+/**
+ * ユーザー登録情報を操作するサービスクラス.
+ * 
+ * @author kojiro0706
+ *
+ */
 @Service
 public class RegisterUserService {
 
