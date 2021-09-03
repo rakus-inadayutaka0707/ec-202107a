@@ -98,7 +98,7 @@
 													</td>
 													<td>
 														<label class="control-label" style="color: red" for="inputError"
-															th:if="${#fields.hasErrors('destinationZipcode'')}" th:errors="*{destinationZipcode}" >郵便番号を入力してください</label><br>
+															th:if="${#fields.hasErrors('destinationZipcode')}" th:errors="*{destinationZipcode}" >郵便番号を入力してください</label><br>
 								<input type="text" name="destinationZipcode" id="inputDestinationZipcode" th:field="*{destinationZipcode}">&nbsp;&nbsp;<button>住所検索</button>
 													</td>
 												</tr>
@@ -110,7 +110,7 @@
 													</td>
 													<td>
 														<label class="control-label" style="color: red" for="inputError"
-															th:if="${#fields.hasErrors('destinationAddress'')}" th:errors="*{destinationAddress}" >住所を入力してください</label><br>
+															th:if="${#fields.hasErrors('destinationAddress')}" th:errors="*{destinationAddress}" >住所を入力してください</label><br>
 								<input type="text" name="destinationAddress" id="inputDestinationAddress" th:field="*{destinationAddress}">
 													</td>
 												</tr>
@@ -122,7 +122,7 @@
 													</td>
 													<td>
 														<label class="control-label" style="color: red" for="inputError"
-															th:if="${#fields.hasErrors('destinationTel'')}" th:errors="*{destinationTel}" >電話番号を入力してください</label><br>
+															th:if="${#fields.hasErrors('destinationTel')}" th:errors="*{destinationTel}" >電話番号を入力してください</label><br>
 								<input type="text" name="destinationTel" id="inputDestinationTel" th:field="*{destinationTel}">
 													</td>
 												</tr>
@@ -137,7 +137,7 @@
 															<div class="row">
 																<div class="col-sm-12">
 																	<label class="control-label" style="color: red" for="inputError"
-															th:if="${#fields.hasErrors('deliveryTimeDate'')}" th:errors="*{deliveryTimeDate}" >配達日を入力してください</label><br>
+															th:if="${#fields.hasErrors('deliveryTimeDate')}" th:errors="*{deliveryTimeDate}" >配達日を入力してください</label><br>
 																</div>
 																<div class="col-sm-5">
 																	<input type="date" name="deliveryTimeDate" id="deliveryTimeDate" th:field="*{deliveryTimeDate}"
