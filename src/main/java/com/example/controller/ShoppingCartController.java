@@ -46,8 +46,9 @@ public class ShoppingCartController {
 	@RequestMapping("")
 	public String showItemShoppingCart(Model model) {
 		User user = (User) session.getAttribute("user");
-		if(user == null && session.getAttribute("temporaryId") == null) {
+		if (user == null && session.getAttribute("temporaryId") == null) {
 			user = new User();
+			user.setId(0);
 		}
 		Order order = shoppingCartService.showItemShoppingCart(user.getId());
 		model.addAttribute("order", order);
@@ -67,7 +68,7 @@ public class ShoppingCartController {
 			return "item_detail";
 		}
 		User user = (User) session.getAttribute("user");
-		if(user == null) {
+		if (user == null) {
 			user = new User();
 			Random random = new Random();
 			user.setId(random.nextInt(99999999) + 5000);

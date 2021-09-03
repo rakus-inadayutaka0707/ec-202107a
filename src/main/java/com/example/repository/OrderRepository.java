@@ -241,9 +241,9 @@ public class OrderRepository {
 	 */
 	public void update(Order order) {
 		SqlParameterSource param = new BeanPropertySqlParameterSource(order);
-		String updateSql = "UPDATE orders SET order_date=:ordeDate,decision_name=:decisionName"
+		String updateSql = "UPDATE orders SET order_date=:orderDate,destination_name=:destinationName"
 				+ ",destination_email=:destinationEmail,destination_zipcode=:destinationZipcode,destination_address=:destinationAddress"
-				+ ",destination_tel=:destinationTel,delivery_time=:deliveryTime,payment_method=:paymentMethod WHERE order_id=:orderId;";
+				+ ",destination_tel=:destinationTel,delivery_time=:deliveryTime,payment_method=:paymentMethod WHERE id=:id;";
 		template.update(updateSql, param);
 	}
 }
