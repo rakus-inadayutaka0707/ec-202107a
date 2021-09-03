@@ -1,5 +1,9 @@
 package com.example.controller;
 
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -40,10 +44,21 @@ public class DecisionOrderController {
 		if (result.hasErrors()) {
 			return "order_confirm";
 		}
+
+		String deliveryTime = form.getDeliveryTimeDate() + " " + form.getDeliveryTimeHour();
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Timestamp deliveryTimeStamp;
+		try {
+			deliveryTimeStamp = new Timestamp(simpleDateFormat.parse(deliveryTime).getTime());
+			form.setDeliveryTime(deliveryTimeStamp);
+		} catch (ParseException e) {
+			return "order_confirm";
+		}
+
 		long millis = System.currentTimeMillis();
-		long deliveryTime = 0;
-		deliveryTime = form.getDeliveryTime().getTime();
-		long difference = deliveryTime - millis;
+		long deliveryTimeFor3Hourago = 0;
+		deliveryTimeFor3Hourago = form.getDeliveryTime().getTime();
+		long difference = deliveryTimeFor3Hourago - millis;
 
 		if (difference < 10800000) {
 			result.rejectValue("deliveryTime", "", "今から3時間後の日時をご入力ください");
