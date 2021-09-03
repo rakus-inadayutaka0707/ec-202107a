@@ -21,7 +21,6 @@ import com.example.repository.ToppingRepository;
  *
  */
 @Service
-@Validated
 public class ShoppingCartService {
 
 	@Autowired
