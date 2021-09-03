@@ -34,7 +34,7 @@ public class ConfirmOrderController {
 		if (userId == null) {
 			return "/toLogin";
 		}
-		Order order = confirmOrderService.load(Integer.parseInt(orderId));
+		Order order = confirmOrderService.confirmOrder(Integer.parseInt(orderId));
 		model.addAttribute("order", order);
 		return "order_confirm";
 	}

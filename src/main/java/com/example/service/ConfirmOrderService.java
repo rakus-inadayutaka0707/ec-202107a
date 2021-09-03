@@ -30,7 +30,7 @@ public class ConfirmOrderService {
 	 * @param orderId を取得したい注文のID
 	 * @return 取得した注文情報
 	 */
-	public Order load(Integer orderId) {
+	public Order confirmOrder(Integer orderId) {
 		Order order = orderRepository.load(orderId);
 		User user = (User) session.getAttribute("user");
 		order.setUserId(user.getId());
