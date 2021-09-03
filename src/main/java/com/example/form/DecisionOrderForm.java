@@ -42,9 +42,16 @@ public class DecisionOrderForm {
 	@Pattern(regexp = "[0-9]{3}-[0-9]{4}-[0-9]{4}$", message = "電話番号はXXXX-XXXX-XXXXの形式で入力してください")
 	private String decisionTel;
 
+	/** 配達日時 */
+	private Timestamp deliveryTime;
+
+	/** 配達日 */
+	@NotBlank(message = "配達日時を入力してください")
+	private String deliveryTimeDate;
+
 	/** 配達時間 */
 	@NotBlank(message = "配達日時を入力してください")
-	private Timestamp deliveryTime;
+	private String deliveryTimeHour;
 
 	/** 支払方法 */
 	private Integer paymentMethod;
@@ -111,6 +118,22 @@ public class DecisionOrderForm {
 
 	public void setDeliveryTime(Timestamp deliveryTime) {
 		this.deliveryTime = deliveryTime;
+	}
+
+	public String getDeliveryTimeDate() {
+		return deliveryTimeDate;
+	}
+
+	public void setDeliveryTimeDate(String deliveryTimeDate) {
+		this.deliveryTimeDate = deliveryTimeDate;
+	}
+
+	public String getDeliveryTimeHour() {
+		return deliveryTimeHour;
+	}
+
+	public void setDeliveryTimeHour(String deliveryTimeHour) {
+		this.deliveryTimeHour = deliveryTimeHour;
 	}
 
 	public Integer getPaymentMethod() {
