@@ -85,7 +85,7 @@
 							</td>
 
 							<!-- table -->
-							<form method="post" action="order_finished.html" th:action="@{/decisionorder}">
+							<form method="post" action="order_finished.html" th:action="@{/destinationorder}" th:object="${decisionOrderForm}">
 								<div class="row">
 									<div
 										class="table-responsive col-lg-offset-3 col-lg-6 col-md-offset-1 col-md-10 col-sm-10 col-xs-12">
@@ -100,8 +100,8 @@
 													</td>
 													<td>
 														<label class="control-label" style="color: red" for="inputError"
-															th:if="${#fields.hasErrors('decisionName')}" th:errors="*{decisionName}" >名前を入力してください</label><br>
-								<input type="text" name="decisionName" id="inputDecisionName" th:field="*{decisionName}">
+															th:if="${#fields.hasErrors('destinationName')}" th:errors="*{destinationName}" >名前を入力してください</label><br>
+								<input type="text" name="destinationName" id="inputDestinationName" th:field="*{destinationName}">
 													</td>
 												</tr>
 												<tr>
@@ -111,9 +111,9 @@
 														</div>
 													</td>
 													<td>
-														<label class="control-label" style="color: red" for="inputError" th:if="${#fields.hasErrors('decisionEmail')}" th:errors="*{decisionEmail}" >
+														<label class="control-label" style="color: red" for="inputError" th:if="${#fields.hasErrors('destinationEmail')}" th:errors="*{destinationEmail}" >
 														メールアドレスを入力してください</label><br>
-								<input type="text" name="decisionEmail" id="inputdecisionEmail" th:field="*{decisionName}">
+								<input type="text" name="destinationEmail" id="inputdestinationEmail" th:field="*{destinationName}">
 													</td>
 												</tr>
 												<tr>
@@ -124,8 +124,8 @@
 													</td>
 													<td>
 														<label class="control-label" style="color: red" for="inputError"
-															th:if="${#fields.hasErrors('decisionZipcode'')}" th:errors="*{decisionZipcode}" >郵便番号を入力してください</label><br>
-								<input type="text" name="decisionZipcode" id="inputDecisionZipcode" th:field="*{decisionZipcode}">&nbsp;&nbsp;<button>住所検索</button>
+															th:if="${#fields.hasErrors('destinationZipcode'')}" th:errors="*{destinationZipcode}" >郵便番号を入力してください</label><br>
+								<input type="text" name="destinationZipcode" id="inputDestinationZipcode" th:field="*{destinationZipcode}">&nbsp;&nbsp;<button>住所検索</button>
 													</td>
 												</tr>
 												<tr>
@@ -136,8 +136,8 @@
 													</td>
 													<td>
 														<label class="control-label" style="color: red" for="inputError"
-															th:if="${#fields.hasErrors('decisionAddress'')}" th:errors="*{decisionAddress}" >住所を入力してください</label><br>
-								<input type="text" name="decisionAddress" id="inputDecisionAddress" th:field="*{decisionAddress}">
+															th:if="${#fields.hasErrors('destinationAddress'')}" th:errors="*{destinationAddress}" >住所を入力してください</label><br>
+								<input type="text" name="destinationAddress" id="inputDestinationAddress" th:field="*{destinationAddress}">
 													</td>
 												</tr>
 												<tr>
@@ -148,8 +148,8 @@
 													</td>
 													<td>
 														<label class="control-label" style="color: red" for="inputError"
-															th:if="${#fields.hasErrors('decisionTel'')}" th:errors="*{decisionTel}" >電話番号を入力してください</label><br>
-								<input type="text" name="decisionTel" id="inputDecisionTel" th:field="*{decisionTel}">
+															th:if="${#fields.hasErrors('destinationTel'')}" th:errors="*{destinationTel}" >電話番号を入力してください</label><br>
+								<input type="text" name="destinationTel" id="inputDestinationTel" th:field="*{destinationTel}">
 													</td>
 												</tr>
 												<tr>
