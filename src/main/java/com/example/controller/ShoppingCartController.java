@@ -1,5 +1,7 @@
 package com.example.controller;
 
+import java.util.Random;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,8 +44,12 @@ public class ShoppingCartController {
 	 * @return ショッピングカート一覧画面
 	 */
 	@RequestMapping("")
-	public String index(Model model) {
-		Order order = shoppingCartService.showItemShoppingCart(1);
+	public String showItemShoppingCart(Model model) {
+		User user = (User) session.getAttribute("user");
+		if(user == null && session.getAttribute("temporaryId") == null) {
+			user = new User();
+		}
+		Order order = shoppingCartService.showItemShoppingCart(user.getId());
 		model.addAttribute("order", order);
 		return "cart_list";
 	}
@@ -61,6 +67,11 @@ public class ShoppingCartController {
 			return "item_detail";
 		}
 		User user = (User) session.getAttribute("user");
+		if(user == null) {
+			user = new User();
+			Random random = new Random();
+			user.setId(random.nextInt(99999999) + 5000);
+		}
 		shoppingCartService.addShoppingCart(form, user.getId());
 		return "redirect:/shopping-cart";
 	}

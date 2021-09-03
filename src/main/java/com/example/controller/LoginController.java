@@ -49,6 +49,9 @@ public class LoginController {
 			return toLogin();
 		}
 		session.setAttribute("user", user);
+		if(session.getAttribute("url") != null) {
+			return "redirect:"+session.getAttribute("url");
+		}
 		return "forward:/show-list";
 
 	}
