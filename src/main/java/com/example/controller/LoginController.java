@@ -49,7 +49,7 @@ public class LoginController {
 			return toLogin();
 		}
 		session.setAttribute("user", user);
-		return "item_list_noodle";
+		return "forward:/show-list";
 
 	}
 
