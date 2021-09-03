@@ -39,6 +39,10 @@ public class OrderHistoryController {
 	@RequestMapping("")
 	public String index(Model model) {
 		User user = (User) session.getAttribute("user");
+		if (user == null && session.getAttribute("temporaryId") == null) {
+			user = new User();
+			user.setId(0);
+		}
 		List<Order> orderList = orderHistoryService.SearchAfterOrderUserId(user.getId());
 		model.addAttribute("orderList", orderList);
 		return "order_history";
