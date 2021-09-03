@@ -213,7 +213,12 @@ public class OrderRepository {
 		Order order = template.query(sql.toString(), param, RSE_ORDER);
 		return order;
 	}
-	
+
+	/**
+	 * Ordersテーブルを更新する.
+	 * 
+	 * @param order 更新したい注文情報
+	 */
 	public void update(Order order) {
 		SqlParameterSource param = new BeanPropertySqlParameterSource(order);
 		String updateSql = "UPDATE orders SET order_date=:ordeDate,decision_name=:decisionName"
