@@ -2,7 +2,6 @@ package com.example.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
 
 import com.example.domain.Order;
 import com.example.domain.OrderItem;
@@ -21,7 +20,6 @@ import com.example.repository.ToppingRepository;
  *
  */
 @Service
-@Validated
 public class ShoppingCartService {
 
 	@Autowired
@@ -56,7 +54,7 @@ public class ShoppingCartService {
 								totalPrice += orderTopping.getTopping().getPriceM();
 							}
 						}
-					} else if(orderItem.getSize() == 'L') {
+					} else if (orderItem.getSize() == 'L') {
 						totalPrice += orderItem.getItem().getPriceL();
 						if (orderItem.getOrderToppingList() != null) {
 							for (OrderTopping orderTopping : orderItem.getOrderToppingList()) {
