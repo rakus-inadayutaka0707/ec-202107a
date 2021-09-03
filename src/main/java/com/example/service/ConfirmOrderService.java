@@ -1,9 +1,12 @@
 package com.example.service;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.domain.Order;
+import com.example.domain.User;
 import com.example.repository.OrderRepository;
 
 /**
@@ -18,6 +21,9 @@ public class ConfirmOrderService {
 	@Autowired
 	private OrderRepository orderRepository;
 
+	@Autowired
+	private HttpSession session;
+
 	/**
 	 * 注文確認画面に表示する商品一覧を取得する.
 	 * 
@@ -26,6 +32,9 @@ public class ConfirmOrderService {
 	 */
 	public Order load(Integer orderId) {
 		Order order = orderRepository.load(orderId);
+		User user = (User) session.getAttribute("user");
+		order.setUserId(user.getId());
+		orderRepository.update(order);
 		return order;
 	}
 }
