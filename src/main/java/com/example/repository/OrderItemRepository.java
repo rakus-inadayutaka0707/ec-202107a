@@ -49,4 +49,15 @@ public class OrderItemRepository {
 		SqlParameterSource param = new MapSqlParameterSource().addValue("id", orderItemId);
 		template.update(sql, param);
 	}
+
+	/**
+	 * 仮IDの注文をUserIDの注文に変更.
+	 * 
+	 * @param orderItem 変更したい注文
+	 */
+	public void update(OrderItem orderItem) {
+		SqlParameterSource param = new BeanPropertySqlParameterSource(orderItem);
+		String sql = "UPDATE order_items SET item_id=:itemId,order_id=:orderId,quantity=:quantity,size=:size WHERE id=:id;";
+		template.update(sql, param);
+	}
 }

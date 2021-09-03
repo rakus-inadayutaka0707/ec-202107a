@@ -45,8 +45,12 @@ public class ShoppingCartController {
 	 */
 	@RequestMapping("")
 	public String showItemShoppingCart(Model model) {
-		User user = (User) session.getAttribute("user");
-		if (user == null && session.getAttribute("temporaryId") == null) {
+		User user = null;
+		if(session.getAttribute("user") != null) {
+			user = (User) session.getAttribute("user");	
+		}else if(session.getAttribute("temporalUserId") != null) {
+			user = (User) session.getAttribute("temporalUserId");
+		}else {
 			user = new User();
 			user.setId(0);
 		}
@@ -67,11 +71,16 @@ public class ShoppingCartController {
 		if (result.hasErrors()) {
 			return "item_detail";
 		}
-		User user = (User) session.getAttribute("user");
-		if (user == null) {
+		User user = null;
+		if(session.getAttribute("user") != null) {
+			user = (User) session.getAttribute("user");	
+		}else if(session.getAttribute("temporalUserId") != null) {
+			user = (User) session.getAttribute("temporalUserId");
+		}else {
 			user = new User();
 			Random random = new Random();
 			user.setId(random.nextInt(99999999) + 5000);
+			session.setAttribute("temporalUserId", user);
 		}
 		shoppingCartService.addShoppingCart(form, user.getId());
 		return "redirect:/shopping-cart";
