@@ -28,7 +28,7 @@ public class LogoutController {
 	public String logout() {
 		session.invalidate();
 		System.out.println();
-		return "item_list_noodle";
+		return "redirect:/show-list";
 	}
 
 }
