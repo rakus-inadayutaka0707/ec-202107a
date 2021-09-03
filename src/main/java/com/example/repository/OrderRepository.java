@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -231,5 +232,18 @@ public class OrderRepository {
 		SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
 		Order order = template.query(sql.toString(), param, RSE_ORDER);
 		return order;
+	}
+
+	/**
+	 * Ordersテーブルを更新する.
+	 * 
+	 * @param order 更新したい注文情報
+	 */
+	public void update(Order order) {
+		SqlParameterSource param = new BeanPropertySqlParameterSource(order);
+		String updateSql = "UPDATE orders SET order_date=:ordeDate,decision_name=:decisionName"
+				+ ",destination_email=:destinationEmail,destination_zipcode=:destinationZipcode,destination_address=:destinationAddress"
+				+ ",destination_tel=:destinationTel,delivery_time=:deliveryTime,payment_method=:paymentMethod WHERE order_id=:orderId;";
+		template.update(updateSql, param);
 	}
 }

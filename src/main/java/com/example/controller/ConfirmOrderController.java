@@ -41,7 +41,7 @@ public class ConfirmOrderController {
 		if(loginCheckService.loginCheck(url)) {
 			return "redirect:/login/toLogin";
 		}
-		Order order = confirmOrderService.load(Integer.parseInt(orderId));
+		Order order = confirmOrderService.confirmOrder(Integer.parseInt(orderId));
 		model.addAttribute("order", order);
 		return "order_confirm";
 	}
