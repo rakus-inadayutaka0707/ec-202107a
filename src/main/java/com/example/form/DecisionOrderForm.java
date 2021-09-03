@@ -23,24 +23,24 @@ public class DecisionOrderForm {
 
 	/** 宛先氏名 */
 	@NotBlank(message = "名前を入力してください")
-	private String decisionName;
+	private String destinationName;
 
 	/** 宛先Eメール */
 	@Email(message = "メールアドレスの形式ではありません")
 	@NotBlank(message = "メールアドレスを入力してください")
-	private String decisionEmail;
+	private String destinationEmail;
 
 	/** 宛先郵便番号 */
 	@Pattern(regexp = "[0-9]{3}-[0-9]{4}$", message = "郵便番号はXXX-XXXXの形式で入力してください")
-	private String decisionZipcode;
+	private String destinationZipcode;
 
 	/** 宛先住所 */
 	@NotBlank(message = "住所を入力してください")
-	private String decisionAddress;
+	private String destinationAddress;
 
 	/** 宛先TEL */
 	@Pattern(regexp = "[0-9]{3}-[0-9]{4}-[0-9]{4}$", message = "電話番号はXXXX-XXXX-XXXXの形式で入力してください")
-	private String decisionTel;
+	private String destinationTel;
 
 	/** 配達日時 */
 	private Timestamp deliveryTime;
@@ -72,44 +72,44 @@ public class DecisionOrderForm {
 		this.orderDate = orderDate;
 	}
 
-	public String getDecisionName() {
-		return decisionName;
+	public String getDestinationName() {
+		return destinationName;
 	}
 
-	public void setDecisionName(String decisionName) {
-		this.decisionName = decisionName;
+	public void setDestinationName(String destinationName) {
+		this.destinationName = destinationName;
 	}
 
-	public String getDecisionEmail() {
-		return decisionEmail;
+	public String getDestinationEmail() {
+		return destinationEmail;
 	}
 
-	public void setDecisionEmail(String decisionEmail) {
-		this.decisionEmail = decisionEmail;
+	public void setDestinationEmail(String destinationEmail) {
+		this.destinationEmail = destinationEmail;
 	}
 
-	public String getDecisionZipcode() {
-		return decisionZipcode;
+	public String getDestinationZipcode() {
+		return destinationZipcode;
 	}
 
-	public void setDecisionZipcode(String decisionZipcode) {
-		this.decisionZipcode = decisionZipcode;
+	public void setDestinationZipcode(String destinationZipcode) {
+		this.destinationZipcode = destinationZipcode;
 	}
 
-	public String getDecisionAddress() {
-		return decisionAddress;
+	public String getDestinationAddress() {
+		return destinationAddress;
 	}
 
-	public void setDecisionAddress(String decisionAddress) {
-		this.decisionAddress = decisionAddress;
+	public void setDestinationAddress(String destinationAddress) {
+		this.destinationAddress = destinationAddress;
 	}
 
-	public String getDecisionTel() {
-		return decisionTel;
+	public String getDestinationTel() {
+		return destinationTel;
 	}
 
-	public void setDecisionTel(String decisionTel) {
-		this.decisionTel = decisionTel;
+	public void setDestinationTel(String destinationTel) {
+		this.destinationTel = destinationTel;
 	}
 
 	public Timestamp getDeliveryTime() {
