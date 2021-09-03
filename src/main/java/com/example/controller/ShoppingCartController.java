@@ -1,6 +1,7 @@
 package com.example.controller;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.Random;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.domain.Order;
 import com.example.domain.User;
 import com.example.form.ShoppingCartForm;
-import com.example.service.LoginCheckService;
 import com.example.service.ShoppingCartService;
 
 /**
@@ -33,9 +33,6 @@ public class ShoppingCartController {
 	private ShoppingCartForm setUpShoppingCartForm() {
 		return new ShoppingCartForm();
 	}
-	
-	@Autowired
-	private LoginCheckService loginCheckService;
 
 	@Autowired
 	private HttpSession session;
@@ -47,15 +44,12 @@ public class ShoppingCartController {
 	 * @return ショッピングカート一覧画面
 	 */
 	@RequestMapping("")
-	public String index(Model model, HttpServletRequest request) {
-		loginCheckService.loginCheck(request);
-		if(session.getAttribute("user") == null) {
-			String url = request.getRequestURI();
-			session.setAttribute("url", url);
-			return "redirect:/login/toLogin";
+	public String showItemShoppingCart(Model model) {
+		User user = (User) session.getAttribute("user");
+		if(user == null && session.getAttribute("temporaryId") == null) {
+			user = new User();
 		}
-		session.removeAttribute("url");
-		Order order = shoppingCartService.showItemShoppingCart(1);
+		Order order = shoppingCartService.showItemShoppingCart(user.getId());
 		model.addAttribute("order", order);
 		return "cart_list";
 	}
@@ -73,6 +67,11 @@ public class ShoppingCartController {
 			return "item_detail";
 		}
 		User user = (User) session.getAttribute("user");
+		if(user == null) {
+			user = new User();
+			Random random = new Random();
+			user.setId(random.nextInt(99999999) + 5000);
+		}
 		shoppingCartService.addShoppingCart(form, user.getId());
 		return "redirect:/shopping-cart";
 	}

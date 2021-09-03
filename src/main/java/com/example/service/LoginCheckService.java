@@ -1,6 +1,5 @@
 package com.example.service;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,14 +11,13 @@ public class LoginCheckService {
 	@Autowired
 	private HttpSession session;
 	
-	public String loginCheck(HttpServletRequest request) {
-		System.out.println(request);
+	public Boolean loginCheck(String url) {
 		if(session.getAttribute("user") == null) {
-			String url = request.getRequestURI();
 			session.setAttribute("url", url);
-			return "redirect:/login/toLogin";
+			return true;
 		}
 		session.removeAttribute("url");
-		return null;
+		session.removeAttribute("temporaryId");
+		return false;
 	}
 }

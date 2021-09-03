@@ -56,7 +56,7 @@ public class ShoppingCartService {
 								totalPrice += orderTopping.getTopping().getPriceM();
 							}
 						}
-					} else if(orderItem.getSize() == 'L') {
+					} else if (orderItem.getSize() == 'L') {
 						totalPrice += orderItem.getItem().getPriceL();
 						if (orderItem.getOrderToppingList() != null) {
 							for (OrderTopping orderTopping : orderItem.getOrderToppingList()) {
