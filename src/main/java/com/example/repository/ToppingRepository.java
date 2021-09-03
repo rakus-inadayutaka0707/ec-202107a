@@ -1,5 +1,7 @@
 package com.example.repository;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -29,6 +31,20 @@ public class ToppingRepository {
 		topping.setPriceL(rs.getInt("price_l"));
 		return topping;
 	};
+	
+	/**
+	 * トッピング情報を全件取得する.
+	 * 
+	 * @return　トッピング情報
+	 */
+	public List<Topping> findAll(){
+		String sql = "SELECT id,name,price_m,price_l FROM toppings";
+		List<Topping> toppingList = template.query(sql, TOPPING_ROW_MAPPER);
+		return toppingList;
+	}
+	
+	
+	
 
 	/**
 	 * 主キー検索を行う.
