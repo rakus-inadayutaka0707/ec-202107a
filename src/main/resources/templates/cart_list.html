@@ -121,7 +121,7 @@
 			</div>
 		</div>
 
-		<div class="row">
+		<div class="row" th:if="${order.id} != null">
 			<div class="col-xs-offset-2 col-xs-8">
 				<div class="form-group text-center">
 					<span>消費税：</span><span id="total-price"
@@ -131,8 +131,12 @@
 				</div>
 			</div>
 		</div>
+		<div class="row text-center" th:unless="${order.id} != null">
+			<h4>カートに商品がありません</h4>
+			<a href="#">商品を見に行く</a>
+		</div>
 
-		<div class="row">
+		<div class="row" th:if="${order.id} != null">
 			<div class="col-xs-offset-5 col-xs-3">
 				<div class="form-group">
 					<form action="order_confirm.html" th:action="@{/confirm-order}">
