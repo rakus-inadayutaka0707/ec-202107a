@@ -49,7 +49,7 @@
 		<!-- table -->
 		<div class="row">
 			<div class="table-responsive col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-sm-10 col-xs-12">
-				<h3 class="text-center">ショッピングカート</h3>
+				<h3 class="text-center">注文詳細</h3>
 				<table class="table table-striped item-list-table">
 					<tbody>
 						<tr>
@@ -107,14 +107,6 @@
 										th:text="${orderItem.quantity} * ${orderItem.item.priceL} + ${orderItem.quantity} * ${orderItem.orderToppingList.size()} * 300">3,280</span>円
 								</div>
 							</td>
-							<td>
-								<div class="text-center">
-									<form th:action="@{/shopping-cart/delete}" method="post">
-										<input type="hidden" name="orderItemId" th:value="${orderItem.id}">
-										<button type="submit" class="btn btn-primary">削除</button>
-									</form>
-								</div>
-							</td>
 						</tr>
 					</tbody>
 				</table>
@@ -135,10 +127,8 @@
 		<div class="row">
 			<div class="col-xs-offset-5 col-xs-3">
 				<div class="form-group">
-					<form action="order_confirm.html" th:action="@{/confirm-order}">
-						<input type="hidden" name="orderId" th:value="${order.id}">
-						<input type="hidden" name="userId" th:value="${order.userId}">
-						<input class="form-control btn btn-warning btn-block" type="submit" value="注文に進む">
+					<form action="order_confirm.html"　th:action="@{/order-history}">
+						<input class="form-control btn btn-warning btn-block" type="submit" value="注文履歴に戻る">
 					</form>
 				</div>
 			</div>
