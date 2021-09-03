@@ -44,12 +44,20 @@ public class OrderHistoryController {
 		return "order_history";
 	}
 
+	/**
+	 * 注文履歴の詳細を検索する
+	 * 
+	 * @param id                 検索する注文ID
+	 * @param redirectAttributes リダイレクト時に使用
+	 * @param model              エラー時に使用
+	 * @return 注文履歴詳細
+	 */
 	@RequestMapping("/item-history")
 	public String itemHistory(int id, RedirectAttributes redirectAttributes, Model model) {
 		User user = (User) session.getAttribute("user");
 		Order order = orderHistoryService.searchOrderIdAndCheckUserId(user.getId(), id);
 		if (order == null) {
-			redirectAttributes.addFlashAttribute("error","検索した注文が見つかりませんでした。");
+			redirectAttributes.addFlashAttribute("error", "検索した注文が見つかりませんでした。");
 			return "redirect:/order-history";
 		}
 		model.addAttribute("order", order);

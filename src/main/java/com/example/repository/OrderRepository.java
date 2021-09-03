@@ -187,6 +187,12 @@ public class OrderRepository {
 		return order;
 	}
 
+	/**
+	 * 注文が完了した商品を全て検索
+	 * 
+	 * @param userId 検索したいユーザー
+	 * @return 検索した結果
+	 */
 	public List<Order> findByUserIdButAfterOrder(int userId) {
 		String sql = "SELECT id,user_id,status,total_price,order_date,destination_name,destination_email,destination_zipcode,destination_address,destination_tel,delivery_time,payment_method FROM orders where user_id = :userId AND status=1 OR status=2 OR status=3 OR status=4 OR status=9;";
 		SqlParameterSource param = new MapSqlParameterSource().addValue("userId", userId);
