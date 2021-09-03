@@ -17,6 +17,7 @@ import com.example.service.LoginService;
  * 
  * @author kojiro0706
  *
+ *
  */
 @Controller
 @RequestMapping("/login")
@@ -51,8 +52,9 @@ public class LoginController {
 		if(session.getAttribute("url") != null) {
 			return "redirect:"+session.getAttribute("url");
 		}
-		return "item_list_noodle";
+		return "forward:/show-list";
 
 	}
 
+	
 }
