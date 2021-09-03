@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.domain.Order;
 import com.example.domain.User;
 import com.example.form.ShoppingCartForm;
+import com.example.service.LoginCheckService;
 import com.example.service.ShoppingCartService;
 
 /**
@@ -31,6 +33,9 @@ public class ShoppingCartController {
 	private ShoppingCartForm setUpShoppingCartForm() {
 		return new ShoppingCartForm();
 	}
+	
+	@Autowired
+	private LoginCheckService loginCheckService;
 
 	@Autowired
 	private HttpSession session;
@@ -42,7 +47,14 @@ public class ShoppingCartController {
 	 * @return ショッピングカート一覧画面
 	 */
 	@RequestMapping("")
-	public String index(Model model) {
+	public String index(Model model, HttpServletRequest request) {
+		loginCheckService.loginCheck(request);
+		if(session.getAttribute("user") == null) {
+			String url = request.getRequestURI();
+			session.setAttribute("url", url);
+			return "redirect:/login/toLogin";
+		}
+		session.removeAttribute("url");
 		Order order = shoppingCartService.showItemShoppingCart(1);
 		model.addAttribute("order", order);
 		return "cart_list";
