@@ -60,7 +60,7 @@
 						</tr>
 
 						<!-- table -->
-						<form method="post" action="order_finished.html" th:action="@{/destinationorder}"
+						<form method="post" action="order_finished.html" th:action="@{/decisionorder}"
 							th:object="${decisionOrderForm}">
 							<div class="row">
 								<div
@@ -244,6 +244,7 @@
 								<div class="row">
 									<div class="col-xs-offset-4 col-xs-4">
 										<div class="form-group">
+										<input type="hidden" name="orderId" th:value="${order.id}">
 											<input class="form-control btn btn-warning btn-block" type="submit"
 												value="この内容で注文する">
 										</div>

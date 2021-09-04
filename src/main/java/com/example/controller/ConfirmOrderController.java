@@ -38,17 +38,19 @@ public class ConfirmOrderController {
 	/**
 	 * 注文確認画面時に表示するショッピングカートの商品を取得する.
 	 * 
-	 * @param userId ショッピングカートを取得したい注文のID
+	 * @param orderId ショッピングカートを取得したい注文のID
 	 * @param userId ショッピングカートを取得したい人のID
 	 * @return 注文確認画面
 	 */
 	@RequestMapping("")
 	public String confirmOrder(String orderId, String userId, Model model, HttpServletRequest request) {
 		String url = request.getRequestURI();
+		System.out.println(orderId);
 		if (loginCheckService.loginCheck(url)) {
 			return "redirect:/login/toLogin";
 		}
 		Order order = confirmOrderService.confirmOrder(Integer.parseInt(orderId));
+		System.out.println(order);
 		model.addAttribute("order", order);
 		return "order_confirm";
 	}

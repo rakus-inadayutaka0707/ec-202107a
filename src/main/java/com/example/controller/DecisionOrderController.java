@@ -4,6 +4,8 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -11,8 +13,11 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.domain.Order;
 import com.example.form.DecisionOrderForm;
 import com.example.service.DecisionOrderService;
+
+import ch.qos.logback.core.net.SyslogOutputStream;
 
 /**
  * 宛先や支払方法を操作するコントローラークラス.
@@ -32,6 +37,14 @@ public class DecisionOrderController {
 		return new DecisionOrderForm();
 	}
 
+	@Autowired
+	private HttpSession session;
+
+	@RequestMapping("/toConfirmOrder")
+	public String toConfirmOrder() {
+		return "order_confirm";
+	}
+
 	/**
 	 * 宛先や支払方法等の情報の登録を行う.
 	 * 
@@ -40,9 +53,11 @@ public class DecisionOrderController {
 	 * @return 注文完了画面
 	 */
 	@RequestMapping("")
-	public String DecisionOrder(@Validated DecisionOrderForm form, BindingResult result) {
+	public String DecisionOrder(@Validated DecisionOrderForm form, BindingResult result, Integer orderId) {
 		if (result.hasErrors()) {
-			return "order_confirm";
+			Order order = decisionOrderService.load(orderId);
+			session.setAttribute("order", order);
+			return toConfirmOrder();
 		}
 
 		String deliveryTime = form.getDeliveryTimeDate() + " " + form.getDeliveryTimeHour();
