@@ -29,7 +29,7 @@ public class LoginCheckService {
 			return true;
 		}
 		session.removeAttribute("url");
-		session.removeAttribute("temporaryId");
+		session.removeAttribute("temporalUserId");
 		return false;
 	}
 }

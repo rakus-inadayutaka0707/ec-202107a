@@ -26,7 +26,7 @@
 						<img th:src="@{/img_noodle/}+${item.imagePath}"  src="../static/img_pizza/1.jpg" class="img-responsive img-rounded item-img-center">
 					</div>
 
-					<input type="hidden" name="itemId" value="1">
+					<input type="hidden" name="itemId" th:value="${item.id}">
 
 					<div class="col-xs-5">
 						<div class="bs-component">

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.domain.User;
 import com.example.form.LoginForm;
 import com.example.service.LoginService;
+import com.example.service.ShoppingCartService;
 
 
 /**
@@ -25,6 +26,9 @@ public class LoginController {
 
 	@Autowired
 	private LoginService loginService;
+	
+	@Autowired
+	private ShoppingCartService shoppingCartService;
 
 	@Autowired
 	private HttpSession session;
@@ -49,6 +53,9 @@ public class LoginController {
 			return toLogin();
 		}
 		session.setAttribute("user", user);
+		if(session.getAttribute("temporalUserId") != null) {
+			shoppingCartService.updateTemporalUserIdToUserId((User) session.getAttribute("temporalUserId"), (User) session.getAttribute("user"));
+		}
 		if(session.getAttribute("url") != null) {
 			return "redirect:"+session.getAttribute("url");
 		}

@@ -7,6 +7,7 @@ import com.example.domain.Order;
 import com.example.domain.OrderItem;
 import com.example.domain.OrderTopping;
 import com.example.domain.Topping;
+import com.example.domain.User;
 import com.example.form.ShoppingCartForm;
 import com.example.repository.OrderItemRepository;
 import com.example.repository.OrderRepository;
@@ -108,5 +109,28 @@ public class ShoppingCartService {
 	 */
 	public void deleteItemShoppingCart(int orderItemId) {
 		orderItemRepository.deleteOrderItemWithOrderTopping(orderItemId);
+	}
+
+	/**
+	 * 仮IDで登録しているオーダをログイン後のオーダに変更する.
+	 * 
+	 * @param order 仮IDで登録している状態のオーダ
+	 * @param user  ログインしたUser情報
+	 */
+	public void updateTemporalUserIdToUserId(User temporalUser, User user) {
+		int status = 0;
+		Order userOrder = orderRepository.findByUserIdAndStatus(user.getId(), status);
+		if (userOrder.getId() != null) {
+			Order temporalOrder = orderRepository.findByUserIdAndStatus(temporalUser.getId(), status);
+			for(OrderItem orderItem : temporalOrder.getOrderItemList()) {
+				orderItem.setOrderId(userOrder.getId());
+				orderItemRepository.update(orderItem);
+			}
+			orderRepository.delete(temporalOrder.getId());
+		} else {
+			Order temporalOrder = orderRepository.findByUserIdAndStatus(temporalUser.getId(), status);
+			temporalOrder.setUserId(user.getId());
+			orderRepository.update(temporalOrder);
+		}
 	}
 }
