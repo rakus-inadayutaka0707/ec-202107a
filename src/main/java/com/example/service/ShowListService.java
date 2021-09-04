@@ -24,17 +24,29 @@ public class ShowListService {
 	/**
 	 * 商品情報を取得する.
 	 * 
+	 * @param name  曖昧検索する文字列
+	 * @param sort  並べ替えを行う文字列
+	 * @param model 表示に使用
 	 * @return 商品情報
 	 */
-	public List<Item> showList(String name,Model model) {
+	public List<Item> showList(String name, String sortDisplay, Model model) {
+		String sort = null;
+		System.out.println(sortDisplay);
+		if (sortDisplay == null || sortDisplay.equals("row")) {
+			sort = "asc";
+		} else {
+			sort = "desc";
+		}
+		System.out.println(sort);
+		model.addAttribute("sort", sort);
 		if (name == null) {
-			List<Item> itemList = itemRepository.findAll();
+			List<Item> itemList = itemRepository.findAll(sort);
 			return itemList;
 		} else {
-			List<Item> itemList = itemRepository.findByName(name);
+			List<Item> itemList = itemRepository.findByName(name, sort);
 			if (itemList.size() == 0) {
 				model.addAttribute("emptyMessage", "該当する商品がありません");
-				return itemRepository.findAll();
+				return itemRepository.findAll(sort);
 			}
 			return itemList;
 		}
