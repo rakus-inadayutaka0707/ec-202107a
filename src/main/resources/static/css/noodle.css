@@ -31,3 +31,17 @@ span#total-price {
 th{
 	text-align: center;
 }
+
+/* ページネーションした際の横幅調整 */
+.itemListNoodle {
+	width: 100%;
+}
+
+/* ページネーションした際の横幅調整 */
+.itemNoodle {
+	width: 25%;
+}
+
+.pagination {
+	text-align: center;
+}
