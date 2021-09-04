@@ -1,9 +1,5 @@
 package com.example.service;
 
-import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,5 +36,10 @@ public class DecisionOrderService {
 			order.setStatus(2);
 		}
 		orderRepository.update(order);
+	}
+
+	public Order load(Integer orderId) {
+		Order order = orderRepository.load(orderId);
+		return order;
 	}
 }
