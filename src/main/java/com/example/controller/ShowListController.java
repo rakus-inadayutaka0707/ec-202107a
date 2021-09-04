@@ -31,19 +31,19 @@ public class ShowListController {
 	 * @return 商品情報
 	 */
 	@RequestMapping("")
-	public String showList(Model model, String name) {
-		List<Item> itemList = showListService.showList(name, model);
+	public String showList(String name, String sortDisplay, Model model) {
+		List<Item> itemList = showListService.showList(name, sortDisplay, model);
 		List<List<Item>> itemListRow = new ArrayList<>();
 		List<Item> takeItemList = new ArrayList<>();
 		for (int i = 0; i < itemList.size(); i++) {
 			if (i % 3 == 0) {
-			  takeItemList = new ArrayList<>();
+				takeItemList = new ArrayList<>();
 			}
 			itemList.get(i);
 			takeItemList.add(itemList.get(i));
-			if(takeItemList.size() == 3) {
+			if (takeItemList.size() == 3) {
 				itemListRow.add(takeItemList);
-			}else if(itemList.size() == i && takeItemList.size() != 3) {
+			} else if (itemList.size() == i + 1 && takeItemList.size() != 3) {
 				itemListRow.add(takeItemList);
 			}
 		}
