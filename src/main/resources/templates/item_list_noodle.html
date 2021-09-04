@@ -59,10 +59,9 @@
 		<div class="row">
 			<div class="table-responsive col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-sm-10 col-xs-12">
 				<table class="table table-striped item-list-table">
-					<tbody>
+					<tbody class="pagination itemListNoodle">
 						<tr th:each="itemList :${itemListRow}">
-
-							<th th:each="item : ${itemList}">
+							<th th:each="item : ${itemList}" class="itemNoodle">
 								<a href="item_detail.html" th:href="@{'/show-item-detail?id=' + ${item.id}}">
 									<img th:src="@{/img_noodle/}+${item.imagePath}"
 										class="img-responsive img-rounded item-img-center" width="200" height="600">
@@ -74,17 +73,17 @@
 								<span class="price">&nbsp;Ｌ&nbsp;</span>&nbsp;&nbsp;
 								<span th:text="${item.priceL}"></span>円(税抜)<br>
 							</th>
-
 						</tr>
 					</tbody>
 				</table>
-
 			</div>
 		</div>
 	</div>
 	<!-- end container -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script src="../static/js/bootstrap.min.js"></script>
+	<script th:src="@{/js/paginathing.min.js}"></script>
+	<script th:src="@{/js/main.js}"></script>
+	<script th:src="@{/js/bootstrap.min.js}"></script>
 </body>
 
 </html>
