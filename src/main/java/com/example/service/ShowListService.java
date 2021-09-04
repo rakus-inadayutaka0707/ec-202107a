@@ -31,13 +31,11 @@ public class ShowListService {
 	 */
 	public List<Item> showList(String name, String sortDisplay, Model model) {
 		String sort = null;
-		System.out.println(sortDisplay);
 		if (sortDisplay == null || sortDisplay.equals("row")) {
 			sort = "asc";
 		} else {
 			sort = "desc";
 		}
-		System.out.println(sort);
 		model.addAttribute("sort", sort);
 		if (name == null) {
 			List<Item> itemList = itemRepository.findAll(sort);

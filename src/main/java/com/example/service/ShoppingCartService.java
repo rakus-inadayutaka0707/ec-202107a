@@ -67,6 +67,7 @@ public class ShoppingCartService {
 			}
 		}
 		order.setTotalPrice(totalPrice);
+		orderRepository.update(order);
 		return order;
 	}
 
