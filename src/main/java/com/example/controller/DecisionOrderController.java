@@ -60,13 +60,10 @@ public class DecisionOrderController {
 		}
 
 		String deliveryTime = form.getDeliveryTimeDate().replace("-", "/") + " " + form.getDeliveryTimeHour();
-//		System.out.println("deliveryTime" + deliveryTime);
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-//		System.out.println("simpleDateFormat" + simpleDateFormat);
 		Timestamp deliveryTimeStamp;
 		try {
 			deliveryTimeStamp = new Timestamp(simpleDateFormat.parse(deliveryTime).getTime());
-//			System.out.println("deliveryTimeStamp" + deliveryTimeStamp);
 			form.setDeliveryTime(deliveryTimeStamp);
 		} catch (ParseException e) {
 			Order order = decisionOrderService.load(orderId);
@@ -78,8 +75,6 @@ public class DecisionOrderController {
 		long deliveryTimeFor3Hourago = 0;
 		deliveryTimeFor3Hourago = form.getDeliveryTime().getTime();
 		long difference = deliveryTimeFor3Hourago - millis;
-//		System.out.println(deliveryTimeFor3Hourago);
-//		System.out.println(difference);
 
 		if (difference < 10800000) {
 			Order order = decisionOrderService.load(orderId);
