@@ -30,7 +30,7 @@ public class DecisionOrderForm {
 	private String destinationEmail;
 
 	/** 宛先郵便番号 */
-	@Pattern(regexp = "[0-9]{3}-[0-9]{4}$", message = "郵便番号はXXX-XXXXの形式で入力してください")
+	@Pattern(regexp = "[0-9]{7}$", message = "郵便番号はXXXXXXXの形式で入力してください")
 	private String destinationZipcode;
 
 	/** 宛先住所 */
