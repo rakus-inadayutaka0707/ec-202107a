@@ -52,14 +52,18 @@ public class ShoppingCartService {
 						totalPrice += orderItem.getItem().getPriceM();
 						if (orderItem.getOrderToppingList() != null) {
 							for (OrderTopping orderTopping : orderItem.getOrderToppingList()) {
-								totalPrice += orderTopping.getTopping().getPriceM();
+								if (orderTopping.getTopping().getId() != null) {
+									totalPrice += orderTopping.getTopping().getPriceM();
+								}
 							}
 						}
 					} else if (orderItem.getSize() == 'L') {
 						totalPrice += orderItem.getItem().getPriceL();
 						if (orderItem.getOrderToppingList() != null) {
 							for (OrderTopping orderTopping : orderItem.getOrderToppingList()) {
-								totalPrice += orderTopping.getTopping().getPriceL();
+								if (orderTopping.getTopping().getId() != null) {
+									totalPrice += orderTopping.getTopping().getPriceL();
+								}
 							}
 						}
 					}
@@ -123,7 +127,7 @@ public class ShoppingCartService {
 		Order userOrder = orderRepository.findByUserIdAndStatus(user.getId(), status);
 		if (userOrder.getId() != null) {
 			Order temporalOrder = orderRepository.findByUserIdAndStatus(temporalUser.getId(), status);
-			for(OrderItem orderItem : temporalOrder.getOrderItemList()) {
+			for (OrderItem orderItem : temporalOrder.getOrderItemList()) {
 				orderItem.setOrderId(userOrder.getId());
 				orderItemRepository.update(orderItem);
 			}
