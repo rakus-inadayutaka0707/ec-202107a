@@ -39,7 +39,7 @@ public class ConfirmOrderController {
 	 * 注文確認画面時に表示するショッピングカートの商品を取得する.
 	 * 
 	 * @param orderId ショッピングカートを取得したい注文のID
-	 * @param userId ショッピングカートを取得したい人のID
+	 * @param userId  ショッピングカートを取得したい人のID
 	 * @return 注文確認画面
 	 */
 	@RequestMapping("")

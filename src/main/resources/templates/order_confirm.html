@@ -139,7 +139,9 @@
 															<div class="row">
 																<div class="col-sm-12">
 																	<label class="control-label" style="color: red" for="inputError"
-															th:if="${#fields.hasErrors('deliveryTimeDate')}" th:errors="*{deliveryTimeDate}" >配達日を入力してください</label><br>
+															th:if="${#fields.hasErrors('deliveryTimeDate')}" th:errors="*{deliveryTimeDate}" >配達日を入力してください</label>
+															<label class="control-label" style="color: red" for="inputError"
+															th:if="${#fields.hasErrors('deliveryTime')}" th:errors="*{deliveryTime}" >dummy</label><br>
 																</div>
 																<label class="control-label" style="color: red" for="inputError"
 															th:if="${#fields.hasErrors('deliveryTime')}" th:errors="*{deliveryTime}" >dummy</label><br>

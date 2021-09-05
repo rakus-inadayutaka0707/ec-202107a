@@ -56,6 +56,13 @@ public class DecisionOrderService {
 //		}
 	}
 
+	/**
+	 * 注文情報を主キー検索する.
+	 * 
+	 * @param orderId 注文ID
+	 * @return 取得された注文情報
+	 * 
+	 */
 	public Order load(Integer orderId) {
 		Order order = orderRepository.load(orderId);
 		return order;

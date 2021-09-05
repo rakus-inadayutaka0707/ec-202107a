@@ -47,11 +47,10 @@ public class DecisionOrderController {
 	 * @return 注文完了画面
 	 */
 	@RequestMapping("")
-	public String DecisionOrder(@Validated DecisionOrderForm form, BindingResult result, Model model, Integer orderId) {
+	public String DecisionOrder(@Validated DecisionOrderForm form, BindingResult result, Integer orderId, Model model) {
 		if (result.hasErrors()) {
 			Order order = decisionOrderService.load(orderId);
 			model.addAttribute("order", order);
-			System.out.println("11111111111111111111");
 			return toConfirmOrder();
 		}
 
