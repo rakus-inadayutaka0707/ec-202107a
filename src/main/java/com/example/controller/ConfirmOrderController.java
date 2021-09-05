@@ -45,12 +45,10 @@ public class ConfirmOrderController {
 	@RequestMapping("")
 	public String confirmOrder(String orderId, String userId, Model model, HttpServletRequest request) {
 		String url = request.getRequestURI();
-		System.out.println(orderId);
 		if (loginCheckService.loginCheck(url)) {
 			return "redirect:/login/toLogin";
 		}
 		Order order = confirmOrderService.confirmOrder(Integer.parseInt(orderId));
-		System.out.println(order);
 		model.addAttribute("order", order);
 		return "order_confirm";
 	}

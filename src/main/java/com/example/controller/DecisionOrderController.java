@@ -4,10 +4,9 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.domain.Order;
 import com.example.form.DecisionOrderForm;
 import com.example.service.DecisionOrderService;
-
-import ch.qos.logback.core.net.SyslogOutputStream;
 
 /**
  * 宛先や支払方法を操作するコントローラークラス.
@@ -37,9 +34,6 @@ public class DecisionOrderController {
 		return new DecisionOrderForm();
 	}
 
-	@Autowired
-	private HttpSession session;
-
 	@RequestMapping("/toConfirmOrder")
 	public String toConfirmOrder() {
 		return "order_confirm";
@@ -53,20 +47,23 @@ public class DecisionOrderController {
 	 * @return 注文完了画面
 	 */
 	@RequestMapping("")
-	public String DecisionOrder(@Validated DecisionOrderForm form, BindingResult result, Integer orderId) {
+	public String DecisionOrder(@Validated DecisionOrderForm form, BindingResult result, Model model, Integer orderId) {
 		if (result.hasErrors()) {
 			Order order = decisionOrderService.load(orderId);
-			session.setAttribute("order", order);
+			model.addAttribute("order", order);
+			System.out.println("11111111111111111111");
 			return toConfirmOrder();
 		}
 
-		String deliveryTime = form.getDeliveryTimeDate() + " " + form.getDeliveryTimeHour();
+		String deliveryTime = form.getDeliveryTimeDate().replace("-", "/") + " " + form.getDeliveryTimeHour();
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Timestamp deliveryTimeStamp;
 		try {
 			deliveryTimeStamp = new Timestamp(simpleDateFormat.parse(deliveryTime).getTime());
 			form.setDeliveryTime(deliveryTimeStamp);
 		} catch (ParseException e) {
+			Order order = decisionOrderService.load(orderId);
+			model.addAttribute("order", order);
 			return "order_confirm";
 		}
 
@@ -76,6 +73,8 @@ public class DecisionOrderController {
 		long difference = deliveryTimeFor3Hourago - millis;
 
 		if (difference < 10800000) {
+			Order order = decisionOrderService.load(orderId);
+			model.addAttribute("order", order);
 			result.rejectValue("deliveryTime", "", "今から3時間後の日時をご入力ください");
 			return "order_confirm";
 		}

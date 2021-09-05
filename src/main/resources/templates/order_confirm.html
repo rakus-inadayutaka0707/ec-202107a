@@ -89,7 +89,7 @@
 													<td>
 														<label class="control-label" style="color: red" for="inputError" th:if="${#fields.hasErrors('destinationEmail')}" th:errors="*{destinationEmail}" >
 														メールアドレスを入力してください</label><br>
-								<input type="text" name="destinationEmail" id="inputdestinationEmail" th:field="*{destinationName}">
+								<input type="text" name="destinationEmail" id="inputdestinationEmail" th:field="*{destinationEmail}">
 													</td>
 												</tr>
 												<tr>
@@ -141,6 +141,8 @@
 																	<label class="control-label" style="color: red" for="inputError"
 															th:if="${#fields.hasErrors('deliveryTimeDate')}" th:errors="*{deliveryTimeDate}" >配達日を入力してください</label><br>
 																</div>
+																<label class="control-label" style="color: red" for="inputError"
+															th:if="${#fields.hasErrors('deliveryTime')}" th:errors="*{deliveryTime}" >dummy</label><br>
 																<div class="col-sm-5">
 																	<input type="date" name="deliveryTimeDate" id="deliveryTimeDate" th:field="*{deliveryTimeDate}"
 																		class="form-control input-sm" />
