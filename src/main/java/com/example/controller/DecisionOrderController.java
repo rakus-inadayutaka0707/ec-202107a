@@ -4,8 +4,6 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,8 +33,6 @@ public class DecisionOrderController {
 	public DecisionOrderForm setUpDecisionOrderForm() {
 		return new DecisionOrderForm();
 	}
-
-	@Autowired
 
 	@RequestMapping("/toConfirmOrder")
 	public String toConfirmOrder() {

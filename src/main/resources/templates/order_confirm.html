@@ -143,6 +143,8 @@
 															<label class="control-label" style="color: red" for="inputError"
 															th:if="${#fields.hasErrors('deliveryTime')}" th:errors="*{deliveryTime}" >dummy</label><br>
 																</div>
+																<label class="control-label" style="color: red" for="inputError"
+															th:if="${#fields.hasErrors('deliveryTime')}" th:errors="*{deliveryTime}" >dummy</label><br>
 																<div class="col-sm-5">
 																	<input type="date" name="deliveryTimeDate" id="deliveryTimeDate" th:field="*{deliveryTimeDate}"
 																		class="form-control input-sm" />
