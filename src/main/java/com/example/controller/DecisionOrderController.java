@@ -3,6 +3,8 @@ package com.example.controller;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -78,6 +80,8 @@ public class DecisionOrderController {
 			return "order_confirm";
 		}
 
+		Calendar calendar = Calendar.getInstance();
+		form.setOrderDate(calendar.getTime());
 		decisionOrderService.DecisionOrder(form);
 		return "order_finished";
 	}
