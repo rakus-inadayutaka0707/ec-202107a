@@ -37,7 +37,6 @@ public class DecisionOrderController {
 	}
 
 	@Autowired
-	private HttpSession session;
 
 	@RequestMapping("/toConfirmOrder")
 	public String toConfirmOrder() {
