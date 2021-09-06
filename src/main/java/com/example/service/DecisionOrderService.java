@@ -22,6 +22,8 @@ public class DecisionOrderService {
 
 	@Autowired
 	private OrderRepository orderRepository;
+
+	@Autowired
 	private MailSender mailSender;
 
 	/**
@@ -41,19 +43,17 @@ public class DecisionOrderService {
 		}
 		orderRepository.update(order);
 
-//		mailSender = null;
-//
-//		SimpleMailMessage mailMessage = new SimpleMailMessage();
-//		mailMessage.setFrom("motoki.izawa@rakus-partners.co.jp");
-//		mailMessage.setTo(form.getDestinationEmail());
-//		mailMessage.setSubject("ラクラクヌードル注文確定メール");
-//		mailMessage.setText("注文が確定しました");
-//
-//		try {
-//			mailSender.send(mailMessage);
-//		} catch (MailException e) {
-//			System.out.println("エラー");
-//		}
+		SimpleMailMessage mailMessage = new SimpleMailMessage();
+		mailMessage.setFrom("bass.754522.9@gmail.com");
+		mailMessage.setTo(form.getDestinationEmail());
+		mailMessage.setSubject("ラクラクヌードル注文確定メール");
+		mailMessage.setText("注文が確定しました");
+
+		try {
+			this.mailSender.send(mailMessage);
+		} catch (MailException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
