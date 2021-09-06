@@ -132,8 +132,25 @@
 			</div>
 		</div>
 		</form>
+		
+		
+		<form th:action="@{/insert-comment}" method="post">
+			<input type="hidden" name="itemId" th:value="${item.id}">
+		    <input type="hidden" name="name" th:value="${session.user.name}"><br> 
+			レビュー:<br>
+			<textarea name="content" cols=40 rows=5></textarea><br>
+			<button>投稿</button>
+		</form>
+		<div th:each="comment:${item.commentList}"> 
+		ユーザー名:<span th:text="${comment.name}"></span><br> 
+		レビュー:<br> 
+		<span th:text="${comment.content}"></span><br>
+		<hr>
+	    </div>
+		
 
 	</div>
+	
 	<!-- end container -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script th:src="@{/js/bootstrap.min.js}"></script>

@@ -44,24 +44,12 @@ public class ShowListService {
 		model.addAttribute("sort", sort);
 		if (name == null) {
 			List<Item> itemList = itemRepository.findAll(sort);
-			for (Item item : itemList) {
-				int itemId = item.getId();
-				List<Comment> commentList = commentRepository.findByItemId(itemId);
-				item.setCommentList(commentList);
-				System.out.println(commentList);
-			}
 			return itemList;
 		} else {
 			List<Item> itemList = itemRepository.findByName(name, sort);
 			if (itemList.size() == 0) {
 				model.addAttribute("emptyMessage", "該当する商品がありません");
 				itemList = itemRepository.findAll(sort);
-			}
-			for (Item item : itemList) {
-				int itemId = item.getId();
-				List<Comment> commentList = commentRepository.findByItemId(itemId);
-				item.setCommentList(commentList);
-				return itemList;
 			}
 			return itemList;
 		}
