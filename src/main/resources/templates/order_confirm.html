@@ -96,12 +96,13 @@
 												<tr>
 													<td>
 														<div class="text-center">
-															郵便番号
+															郵便番号<br>
+															(例：XXX-XXXX)
 														</div>
 													</td>
 													<td>
 														<label class="control-label" style="color: red" for="inputError"
-															th:if="${#fields.hasErrors('destinationZipcode')}" th:errors="*{destinationZipcode}" >郵便番号を入力してください</label><br>
+															th:if="${#fields.hasErrors('destinationZipcode')}" th:errors="*{destinationZipcode}">郵便番号を入力してください</label><br>
 								<input type="text" name="destinationZipcode" id="inputDestinationZipcode" th:field="*{destinationZipcode}">&nbsp;&nbsp;<button id="search" type="button">住所検索</button>
 													</td>
 												</tr>
@@ -120,7 +121,8 @@
 												<tr>
 													<td>
 														<div class="text-center">
-															電話番号
+															電話番号<br>
+															(例：XXX-XXXX-XXXX)
 														</div>
 													</td>
 													<td>
@@ -140,7 +142,7 @@
 															<div class="row">
 																<div class="col-sm-12">
 																	<label class="control-label" style="color: red" for="inputError"
-															th:if="${#fields.hasErrors('deliveryTimeDate')}" th:errors="*{deliveryTimeDate}" >配達日を入力してください</label>
+															th:if="${#fields.hasErrors('deliveryTimeDate')}" th:errors="*{deliveryTimeDate}" ></label>
 															<label class="control-label" style="color: red" for="inputError"
 															th:if="${#fields.hasErrors('deliveryTime')}" th:errors="*{deliveryTime}" >dummy</label><br>
 																</div>
