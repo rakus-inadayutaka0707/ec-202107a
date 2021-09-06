@@ -67,7 +67,11 @@
                             </td>
                             <td>
                                 <div class="text-center">
-                                    <span th:text="${order.status}">未入金</span>
+                                    <span th:if="${order.status} == 1" th:text="未入金">未入金</span>
+                                    <span th:if="${order.status} == 2" th:text="入金済み">未入金</span>
+                                    <span th:if="${order.status} == 3" th:text="発送済み">未入金</span>
+                                    <span th:if="${order.status} == 4" th:text="配送完了">未入金</span>
+                                    <span th:if="${order.status} == 9" th:text="キャンセル">未入金</span>
                                 </div>
                             </td>
                         </tr>
@@ -79,7 +83,7 @@
         <div class="row">
             <div class="col-xs-offset-5 col-xs-3">
                 <div class="form-group">
-                	<a th:href="@{/show-list}" class="form-control btn btn-warning btn-block">商品一覧へ戻る</a>
+                	<a th:href="@{/}" class="form-control btn btn-warning btn-block">商品一覧へ戻る</a>
                 </div>
             </div>
         </div>

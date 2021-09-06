@@ -115,7 +115,7 @@
 		</div>
 		<div class="row text-center" th:unless="${order.totalPrice} != 0">
 			<h4>カートに商品がありません</h4>
-			<a th:href="@{/show-list}" class="btn btn-warning btn-block　text-center">商品を見に行く</a>
+			<a th:href="@{/}" class="btn btn-warning btn-block　text-center">商品を見に行く</a>
 		</div>
 
 		<div class="row" th:if="${order.totalPrice} != 0">
