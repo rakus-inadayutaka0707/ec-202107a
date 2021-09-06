@@ -101,7 +101,7 @@
 													<td>
 														<label class="control-label" style="color: red" for="inputError"
 															th:if="${#fields.hasErrors('destinationZipcode')}" th:errors="*{destinationZipcode}" >郵便番号を入力してください</label><br>
-								<input type="text" name="destinationZipcode" id="inputDestinationZipcode" th:field="*{destinationZipcode}">&nbsp;&nbsp;<button>住所検索</button>
+								<input type="text" name="destinationZipcode" id="inputDestinationZipcode" th:field="*{destinationZipcode}">&nbsp;&nbsp;<button id="search" type="button">住所検索</button>
 													</td>
 												</tr>
 												<tr>
@@ -258,7 +258,9 @@
 			</div>
 			<!-- end container -->
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+            <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
 			<script src="../static/js/bootstrap.min.js"></script>
+			<script th:src="@{/js/serch_for_zipcode.js}"></script>
 </body>
 
 </html>
