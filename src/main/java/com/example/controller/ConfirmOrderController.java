@@ -53,12 +53,13 @@ public class ConfirmOrderController {
 		String url = request.getRequestURI();
 		if (loginCheckService.loginCheck(url)) {
 			session.setAttribute("orderId", orderId);
-			System.out.println(session.getAttribute("orderId"));
 			return "redirect:/login/toLogin";
 		}
 		if (session.getAttribute("orderId") != null) {
 			orderId = (String) session.getAttribute("orderId");
+			System.out.println(orderId);
 		}
+		System.out.println(orderId);
 		Order order = confirmOrderService.confirmOrder(Integer.parseInt(orderId));
 		System.out.println(order);
 		session.removeAttribute("orderId");
