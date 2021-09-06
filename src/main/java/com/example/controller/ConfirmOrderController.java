@@ -14,6 +14,7 @@ import com.example.domain.User;
 import com.example.form.DecisionOrderForm;
 import com.example.service.ConfirmOrderService;
 import com.example.service.LoginCheckService;
+import com.example.service.ShoppingCartService;
 
 /**
  * 注文確認画面表示時に使用するControllerクラス.
@@ -31,6 +32,9 @@ public class ConfirmOrderController {
 
 	@Autowired
 	private LoginCheckService loginCheckService;
+
+	@Autowired
+	private ShoppingCartService shoppingCartService;
 
 	@ModelAttribute
 	public DecisionOrderForm setUpDecisionOrderForm() {
@@ -53,17 +57,15 @@ public class ConfirmOrderController {
 	public String confirmOrder(String orderId, String userId, Model model, HttpServletRequest request) {
 		String url = request.getRequestURI();
 		if (loginCheckService.loginCheck(url)) {
-			session.setAttribute("orderId", orderId);
 			return "redirect:/login/toLogin";
 		}
-		if (session.getAttribute("orderId") != null) {
-			orderId = (String) session.getAttribute("orderId");
+		if (orderId == null) {
+			User user = (User) session.getAttribute("user");
+			Order order = shoppingCartService.showItemShoppingCart(user.getId());
+			orderId = String.valueOf(order.getId());
 		}
 		Order order = confirmOrderService.confirmOrder(Integer.parseInt(orderId));
 		session.removeAttribute("orderId");
-		User user = (User) session.getAttribute("user");
-		System.out.println(user);
-		model.addAttribute("user" + user);
 		model.addAttribute("order", order);
 		return "order_confirm";
 	}
