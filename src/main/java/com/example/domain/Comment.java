@@ -8,7 +8,7 @@ public class Comment {
 	private String name;
 	/** コンテント */
 	private String content;
-	/** コメントID */
+	/** 商品ID */
 	private Integer itemId;
 	
 	

@@ -148,6 +148,9 @@
 		<div th:each="comment:${item.commentList}">
 			ユーザー名:<span th:text="${comment.name}"></span><br> レビュー:<br>
 			<span th:text="${comment.content}"></span><br>
+			<form th:action="@{/delete-comment}" method="post">
+				<button name="id" th:value="${comment.id}">削除</button>
+			</form>
 			<hr>
 		</div>
 	</div>
