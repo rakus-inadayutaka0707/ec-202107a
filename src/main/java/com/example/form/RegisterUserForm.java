@@ -21,13 +21,13 @@ public class RegisterUserForm {
 	@NotBlank(message = "メールアドレスを入力してください")
 	private String email;
 	/** パスワード */
-	@Size(min = 8, max = 16, message= "パスワードは８文字以上１６文字以内で設定してください")
+	@Size(min = 8, max = 16, message = "パスワードは８文字以上１６文字以内で設定してください")
 	private String password;
 	/** 確認用パスワード */
 	@NotBlank(message = "確認用パスワードを入力してください")
 	private String confirmationPassword;
 	/** 郵便番号 */
-	@Pattern(regexp = "[0-9]{3}-[0-9]{4}$", message = "郵便番号はXXX-XXXXの形式で入力してください")
+	@Pattern(regexp = "[0-9]{7}$", message = "郵便番号はXXXXXXXの形式で入力してください")
 	private String zipcode;
 	/** 住所 */
 	@NotBlank(message = "住所を入力してください")
