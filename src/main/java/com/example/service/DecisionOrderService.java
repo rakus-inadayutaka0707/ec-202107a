@@ -33,7 +33,6 @@ public class DecisionOrderService {
 	 * @param form 入力された宛先情報
 	 * 
 	 */
-	@Async
 	public void DecisionOrder(DecisionOrderForm form) {
 		Order order = orderRepository.load(form.getOrderId());
 		BeanUtils.copyProperties(form, order);
@@ -44,7 +43,16 @@ public class DecisionOrderService {
 			order.setStatus(2);
 		}
 		orderRepository.update(order);
+	}
 
+	/**
+	 * 注文完了メールを送信する.
+	 * 
+	 * @param form 入力された宛先情報
+	 * 
+	 */
+	@Async
+	public void sendMail(DecisionOrderForm form) {
 		SimpleMailMessage mailMessage = new SimpleMailMessage();
 		mailMessage.setFrom("bass.754522.9@gmail.com");
 		mailMessage.setTo(form.getDestinationEmail());
