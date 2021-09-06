@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,20 +36,33 @@ public class ConfirmOrderController {
 		return new DecisionOrderForm();
 	}
 
+	@Autowired
+	private HttpSession session;
+
 	/**
 	 * 注文確認画面時に表示するショッピングカートの商品を取得する.
 	 * 
 	 * @param orderId ショッピングカートを取得したい注文のID
 	 * @param userId  ショッピングカートを取得したい人のID
+	 * @param model   リクエストスコープ
+	 * @param request HTTP サーブレットのリクエスト情報
 	 * @return 注文確認画面
 	 */
 	@RequestMapping("")
 	public String confirmOrder(String orderId, String userId, Model model, HttpServletRequest request) {
 		String url = request.getRequestURI();
 		if (loginCheckService.loginCheck(url)) {
+			session.setAttribute("orderId", orderId);
 			return "redirect:/login/toLogin";
 		}
+		if (session.getAttribute("orderId") != null) {
+			orderId = (String) session.getAttribute("orderId");
+			System.out.println(orderId);
+		}
+		System.out.println(orderId);
 		Order order = confirmOrderService.confirmOrder(Integer.parseInt(orderId));
+		System.out.println(order);
+		session.removeAttribute("orderId");
 		model.addAttribute("order", order);
 		return "order_confirm";
 	}
