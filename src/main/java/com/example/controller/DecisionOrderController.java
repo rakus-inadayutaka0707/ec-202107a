@@ -4,7 +4,6 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,7 +43,10 @@ public class DecisionOrderController {
 	/**
 	 * 宛先や支払方法等の情報の登録を行う.
 	 * 
-	 * @param form 宛先や支払方法等の情報用フォーム.
+	 * @param form    宛先や支払方法等の情報用フォーム.
+	 * @param result  エラー情報
+	 * @param orderId 入力された注文情報ID
+	 * @param model   リクエストスコープ
 	 * @return 注文確認画面
 	 * @return 注文完了画面
 	 */
