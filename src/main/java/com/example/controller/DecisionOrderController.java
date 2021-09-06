@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,6 +26,7 @@ import com.example.service.DecisionOrderService;
  */
 @Controller
 @RequestMapping("/decisionorder")
+@EnableAsync
 public class DecisionOrderController {
 
 	@Autowired
@@ -38,6 +40,11 @@ public class DecisionOrderController {
 	@RequestMapping("/toConfirmOrder")
 	public String toConfirmOrder() {
 		return "order_confirm";
+	}
+
+	@RequestMapping("/toOrderFinished")
+	public String toOrderFinished() {
+		return "order_finished";
 	}
 
 	/**
@@ -85,7 +92,8 @@ public class DecisionOrderController {
 		Calendar calendar = Calendar.getInstance();
 		form.setOrderDate(calendar.getTime());
 		decisionOrderService.DecisionOrder(form);
-		return "order_finished";
+		decisionOrderService.sendMail(form);
+		return "redirect:/decisionorder/toOrderFinished";
 	}
 
 }
