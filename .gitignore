@@ -5,6 +5,7 @@ target/
 !**/src/test/**/target/
 
 ### STS ###
+src/main/resources/application.yml
 .apt_generated
 .classpath
 .factorypath
