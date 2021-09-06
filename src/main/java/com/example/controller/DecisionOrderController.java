@@ -3,8 +3,7 @@ package com.example.controller;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
-import javax.servlet.http.HttpSession;
+import java.util.Calendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,9 +35,6 @@ public class DecisionOrderController {
 		return new DecisionOrderForm();
 	}
 
-	@Autowired
-	private HttpSession session;
-
 	@RequestMapping("/toConfirmOrder")
 	public String toConfirmOrder() {
 		return "order_confirm";
@@ -47,7 +43,10 @@ public class DecisionOrderController {
 	/**
 	 * 宛先や支払方法等の情報の登録を行う.
 	 * 
-	 * @param form 宛先や支払方法等の情報用フォーム.
+	 * @param form    宛先や支払方法等の情報用フォーム.
+	 * @param result  エラー情報
+	 * @param orderId 入力された注文情報ID
+	 * @param model   リクエストスコープ
 	 * @return 注文確認画面
 	 * @return 注文完了画面
 	 */
@@ -83,6 +82,8 @@ public class DecisionOrderController {
 			return "order_confirm";
 		}
 
+		Calendar calendar = Calendar.getInstance();
+		form.setOrderDate(calendar.getTime());
 		decisionOrderService.DecisionOrder(form);
 		return "order_finished";
 	}

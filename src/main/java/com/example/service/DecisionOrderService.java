@@ -2,6 +2,9 @@ package com.example.service;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailException;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 
 import com.example.domain.Order;
@@ -20,6 +23,9 @@ public class DecisionOrderService {
 	@Autowired
 	private OrderRepository orderRepository;
 
+	@Autowired
+	private MailSender mailSender;
+
 	/**
 	 * 注文確認画面で入力された情報をDBに登録する.
 	 * 
@@ -36,6 +42,18 @@ public class DecisionOrderService {
 			order.setStatus(2);
 		}
 		orderRepository.update(order);
+
+		SimpleMailMessage mailMessage = new SimpleMailMessage();
+		mailMessage.setFrom("bass.754522.9@gmail.com");
+		mailMessage.setTo(form.getDestinationEmail());
+		mailMessage.setSubject("ラクラクヌードル注文確定メール");
+		mailMessage.setText("注文が確定しました");
+
+		try {
+			this.mailSender.send(mailMessage);
+		} catch (MailException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
