@@ -2,7 +2,12 @@
 
 $(function() {
 	$('#search').on('click', function() {
-		$('.searchAnimation').addClass('animate__animated animate__rubberBand')
+		let code = $('#code').val();
+		if(code === ""){
+			$('.notSearchAnimation').addClass('animate__animated animate__rubberBand')	
+		}else{
+			$('.searchAnimation').addClass('animate__animated animate__zoomOutUp')
+		}
 	})
 
 	$('.deleteItemButton').on('click', function() {
