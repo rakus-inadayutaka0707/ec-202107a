@@ -48,6 +48,11 @@ public class ShowListController {
 			}
 		}
 		model.addAttribute("itemListRow", itemListRow);
+		try {
+			Thread. sleep(400);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		return "item_list_noodle";
 	}
 }
