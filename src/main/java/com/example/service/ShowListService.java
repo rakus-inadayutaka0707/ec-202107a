@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.example.domain.Comment;
 import com.example.domain.Item;
+import com.example.repository.CommentRepository;
 import com.example.repository.ItemRepository;
 
 /**
@@ -20,6 +22,8 @@ public class ShowListService {
 
 	@Autowired
 	private ItemRepository itemRepository;
+	
+	@Autowired CommentRepository commentRepository;
 
 	/**
 	 * 商品情報を取得する.
@@ -39,9 +43,19 @@ public class ShowListService {
 		model.addAttribute("sort", sort);
 		if (name == null) {
 			List<Item> itemList = itemRepository.findAll(sort);
+			for (Item item : itemList) {
+				int itemId = item.getId();
+				List<Comment> commentList = commentRepository.findByItemId(itemId);
+				item.setCommentList(commentList);
+			}
 			return itemList;
 		} else {
 			List<Item> itemList = itemRepository.findByName(name, sort);
+			for (Item item : itemList) {
+				int itemId = item.getId();
+				List<Comment> commentList = commentRepository.findByItemId(itemId);
+				item.setCommentList(commentList);
+			}
 			if (itemList.size() == 0) {
 				model.addAttribute("emptyMessage", "該当する商品がありません");
 				return itemRepository.findAll(sort);
