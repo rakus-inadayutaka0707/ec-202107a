@@ -18,6 +18,11 @@ public class InsertCommentService {
 	@Autowired
 	private CommentRepository commentRepository;
 	
+	/**
+	 * コメント情報を登録する.
+	 * 
+	 * @param comment コメント情報
+	 */
 	public void insertComment(Comment comment) {
 		
 		commentRepository.insert(comment);
