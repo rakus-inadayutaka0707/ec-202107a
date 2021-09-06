@@ -13,6 +13,12 @@ import org.springframework.stereotype.Repository;
 
 import com.example.domain.Comment;
 
+/**
+ * Commentsテーブルを操作するリポジトリ.
+ * 
+ * @author kojiro0706
+ *
+ */
 @Repository
 public class CommentRepository {
 	
