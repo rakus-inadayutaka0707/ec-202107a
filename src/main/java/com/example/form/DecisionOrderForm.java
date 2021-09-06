@@ -27,6 +27,7 @@ public class DecisionOrderForm {
 
 	/** 宛先Eメール */
 	@Email(message = "メールアドレスの形式ではありません")
+	@NotBlank(message = "メールアドレスを入力してください")
 	private String destinationEmail;
 
 	/** 宛先郵便番号 */
