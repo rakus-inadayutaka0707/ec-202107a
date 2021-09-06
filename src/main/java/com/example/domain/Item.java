@@ -25,6 +25,16 @@ public class Item {
 	private Boolean deleted;
 	/** トッピングリスト */
 	private List<Topping> toppingList;
+	
+	private List<Comment> commentList;
+
+	public List<Comment> getCommentList() {
+		return commentList;
+	}
+
+	public void setCommentList(List<Comment> commentList) {
+		this.commentList = commentList;
+	}
 
 	public Integer getId() {
 		return id;
@@ -95,4 +105,6 @@ public class Item {
 		return "Item [id=" + id + ", name=" + name + ", description=" + description + ", priceM=" + priceM + ", priceL="
 				+ priceL + ", imagePath=" + imagePath + ", deleted=" + deleted + ", toppingList=" + toppingList + "]";
 	}
+
+	
 }
