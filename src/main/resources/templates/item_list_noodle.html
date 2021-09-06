@@ -71,9 +71,9 @@
 								<a href="item_detail.html" th:text="${item.name}"
 									th:href="@{'/show-item-detail?id=' + ${item.id}}">じゃがバターベーコン</a><br>
 								<span class="price">&nbsp;M&nbsp;</span>&nbsp;&nbsp;
-								<span th:text="${item.priceM}"></span>円(税抜)<br>
+								<span th:text="${#numbers.formatInteger(item.priceM,0,'COMMA')}"></span>円(税抜)<br>
 								<span class="price">&nbsp;Ｌ&nbsp;</span>&nbsp;&nbsp;
-								<span th:text="${item.priceL}"></span>円(税抜)<br>
+								<span th:text="${#numbers.formatInteger(item.priceL,0,'COMMA')}"></span>円(税抜)<br>
 							</th>
 						</tr>
 					</tbody>
