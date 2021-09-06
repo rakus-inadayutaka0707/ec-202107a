@@ -69,7 +69,7 @@ public class ItemRepository {
 	public List<Item> findByName(String name, String sort) {
 
 		String sql = "SELECT id,name,description,price_m,price_l,image_path,deleted"
-				+ " FROM items WHERE name LIKE :name ORDER BY price_m " + sort + " ;";
+				+ " FROM items WHERE name ILIKE :name ORDER BY price_m " + sort + " ;";
 		SqlParameterSource param = new MapSqlParameterSource().addValue("name", "%" + name + "%");
 		List<Item> itemList = template.query(sql, param, ITEM_ROW_MAPPER);
 		return itemList;

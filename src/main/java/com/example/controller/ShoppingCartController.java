@@ -95,6 +95,11 @@ public class ShoppingCartController {
 	@RequestMapping("/delete")
 	public String deleteItemShoppingCart(int orderItemId) {
 		shoppingCartService.deleteItemShoppingCart(orderItemId);
+		try {
+			Thread. sleep(400);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		return "redirect:/shopping-cart";
 	}
 }
