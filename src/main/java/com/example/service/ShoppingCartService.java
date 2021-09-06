@@ -123,19 +123,19 @@ public class ShoppingCartService {
 	 * @param user  ログインしたUser情報
 	 */
 	public void updateTemporalUserIdToUserId(User temporalUser, User user) {
-		int status = 0;
-		Order userOrder = orderRepository.findByUserIdAndStatus(user.getId(), status);
-		if (userOrder.getId() != null) {
-			Order temporalOrder = orderRepository.findByUserIdAndStatus(temporalUser.getId(), status);
-			for (OrderItem orderItem : temporalOrder.getOrderItemList()) {
-				orderItem.setOrderId(userOrder.getId());
-				orderItemRepository.update(orderItem);
-			}
-			orderRepository.delete(temporalOrder.getId());
-		} else {
-			Order temporalOrder = orderRepository.findByUserIdAndStatus(temporalUser.getId(), status);
-			temporalOrder.setUserId(user.getId());
-			orderRepository.update(temporalOrder);
-		}
+//		int status = 0;
+//		Order userOrder = orderRepository.findByUserIdAndStatus(user.getId(), status);
+//		if (userOrder.getId() != null) {
+//			Order temporalOrder = orderRepository.findByUserIdAndStatus(temporalUser.getId(), status);
+//			for (OrderItem orderItem : temporalOrder.getOrderItemList()) {
+//				orderItem.setOrderId(userOrder.getId());
+//				orderItemRepository.update(orderItem);
+//			}
+//			orderRepository.delete(temporalOrder.getId());
+//		} else {
+//			Order temporalOrder = orderRepository.findByUserIdAndStatus(temporalUser.getId(), status);
+//			temporalOrder.setUserId(user.getId());
+//			orderRepository.update(temporalOrder);
+//		}
 	}
 }
