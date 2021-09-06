@@ -18,7 +18,7 @@ import com.example.service.ShowListService;
  *
  */
 @Controller
-@RequestMapping("/show-list")
+@RequestMapping("/")
 public class ShowListController {
 
 	@Autowired
