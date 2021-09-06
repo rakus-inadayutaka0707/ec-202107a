@@ -85,7 +85,7 @@ public class DecisionOrderController {
 		Calendar calendar = Calendar.getInstance();
 		form.setOrderDate(calendar.getTime());
 		decisionOrderService.DecisionOrder(form);
-		return "order_finished";
+		return "redirect:/toConfirmOrder()";
 	}
 
 }

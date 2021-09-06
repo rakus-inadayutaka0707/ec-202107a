@@ -33,6 +33,7 @@ public class ConfirmOrderService {
 	public Order confirmOrder(Integer orderId) {
 		Order order = orderRepository.load(orderId);
 		User user = (User) session.getAttribute("user");
+		System.out.println("222222222222222" + user);
 		order.setUserId(user.getId());
 		orderRepository.update(order);
 		return order;

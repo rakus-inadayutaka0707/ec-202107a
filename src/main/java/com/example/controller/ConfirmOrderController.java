@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.domain.Order;
+import com.example.domain.User;
 import com.example.form.DecisionOrderForm;
 import com.example.service.ConfirmOrderService;
 import com.example.service.LoginCheckService;
@@ -58,12 +59,12 @@ public class ConfirmOrderController {
 		}
 		if (session.getAttribute("orderId") != null) {
 			orderId = (String) session.getAttribute("orderId");
-			System.out.println(orderId);
 		}
-		System.out.println(orderId);
 		Order order = confirmOrderService.confirmOrder(Integer.parseInt(orderId));
-		System.out.println(order);
 		session.removeAttribute("orderId");
+		User user = (User) session.getAttribute("user");
+		System.out.println(user);
+		model.addAttribute("user" + user);
 		model.addAttribute("order", order);
 		return "order_confirm";
 	}
