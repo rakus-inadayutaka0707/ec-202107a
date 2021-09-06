@@ -65,6 +65,7 @@ public class ConfirmOrderController {
 			orderId = String.valueOf(order.getId());
 		}
 		Order order = confirmOrderService.confirmOrder(Integer.parseInt(orderId));
+		order.setUser((User) session.getAttribute("user"));
 		session.removeAttribute("orderId");
 		model.addAttribute("order", order);
 		return "order_confirm";

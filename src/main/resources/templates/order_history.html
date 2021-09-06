@@ -62,7 +62,7 @@
                             </td>
                             <td class="text-center">
                                 <div class="center">
-                                    <span th:text="${order.totalPrice}">10000</span>
+                                    <span th:text="${#numbers.formatInteger(order.totalPrice,0,'COMMA')}">10000</span>
                                 </div>
                             </td>
                             <td>
