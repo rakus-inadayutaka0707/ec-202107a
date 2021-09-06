@@ -10,6 +10,8 @@ public class Comment {
 	private String content;
 	/** コメントID */
 	private Integer itemId;
+	
+	
 	public Integer getId() {
 		return id;
 	}

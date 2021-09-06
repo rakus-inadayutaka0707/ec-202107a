@@ -25,16 +25,10 @@ public class Item {
 	private Boolean deleted;
 	/** トッピングリスト */
 	private List<Topping> toppingList;
-	
+	/** コメントリスト */
 	private List<Comment> commentList;
 
-	public List<Comment> getCommentList() {
-		return commentList;
-	}
-
-	public void setCommentList(List<Comment> commentList) {
-		this.commentList = commentList;
-	}
+	
 
 	public Integer getId() {
 		return id;
@@ -99,12 +93,23 @@ public class Item {
 	public void setToppingList(List<Topping> toppingList) {
 		this.toppingList = toppingList;
 	}
+	
+	public List<Comment> getCommentList() {
+		return commentList;
+	}
+
+	public void setCommentList(List<Comment> commentList) {
+		this.commentList = commentList;
+	}
 
 	@Override
 	public String toString() {
 		return "Item [id=" + id + ", name=" + name + ", description=" + description + ", priceM=" + priceM + ", priceL="
-				+ priceL + ", imagePath=" + imagePath + ", deleted=" + deleted + ", toppingList=" + toppingList + "]";
+				+ priceL + ", imagePath=" + imagePath + ", deleted=" + deleted + ", toppingList=" + toppingList
+				+ ", commentList=" + commentList + "]";
 	}
+
+	
 
 	
 }
