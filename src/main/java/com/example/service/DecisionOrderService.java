@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.example.domain.Order;
@@ -32,6 +33,7 @@ public class DecisionOrderService {
 	 * @param form 入力された宛先情報
 	 * 
 	 */
+	@Async
 	public void DecisionOrder(DecisionOrderForm form) {
 		Order order = orderRepository.load(form.getOrderId());
 		BeanUtils.copyProperties(form, order);
