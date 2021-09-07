@@ -1,5 +1,7 @@
 package com.example.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +23,9 @@ public class ShowItemDetailController {
 	@Autowired
 	private ShowItemDetailService showItemDetailService ;
 	
+	@Autowired
+	private HttpSession session;
+	
 	/**
 	 * 商品詳細画面を出力する.
 	 * 
@@ -30,6 +35,11 @@ public class ShowItemDetailController {
 	 */
 	@RequestMapping("")
 	public String showItemDetail(Integer id,Model model) {
+		if(session.getAttribute("item")!= null) {
+			Item item = (Item) session.getAttribute("item");
+			id=item.getId();
+			session.removeAttribute("item");
+		}
 		Item item = showItemDetailService.showItemDetail(id);
 		model.addAttribute("item",item);
 		
