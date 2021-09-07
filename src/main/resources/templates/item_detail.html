@@ -143,15 +143,16 @@
 		<form th:if="${session.user}!=null" th:action="@{/insert-comment}" method="post">
 			<input type="hidden" name="itemId" th:value="${item.id}"> <input
 				type="hidden" name="name" th:value="${session.user.name}"><br>
-			レビュー:<textarea name="content" cols=110 rows=5></textarea>
+			<textarea name="content" cols=110 rows=5></textarea>
 			<br>
 			<button >投稿</button>
 		</form>
-		</div>
+
+		<strong>みんなのレビュー:</strong>
 		<hr>
 		<div th:each="comment:${item.commentList}">
 			ユーザー名:<span th:text="${comment.name}"></span><br>
-            レビュー:<span th:text="${comment.content}"></span><br>
+            <span th:text="${comment.content}"></span><br>
 			<form th:if="${session.user}!=null" th:action="@{/delete-comment}" method="post">
 				<button name="commentId" th:value="${comment.id}" th:if="${session.user.name == comment.name}">削除</button>
 				<input type="hidden" name="itemId" th:value="${item.id}">
