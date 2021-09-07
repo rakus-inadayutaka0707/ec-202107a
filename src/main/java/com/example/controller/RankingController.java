@@ -20,7 +20,8 @@ public class RankingController {
 	@RequestMapping("")
 	public String ranking(Model model) {
 		List<OrderItem> orderItemList = rankingService.ranking();
-		model.addAttribute("orderItemKist", orderItemList);
+		model.addAttribute("orderItemList", orderItemList);
+		System.out.println(orderItemList);
 		return "ranking";
 	}
 
