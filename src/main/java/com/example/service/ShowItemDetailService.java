@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.domain.Comment;
 import com.example.domain.Item;
 import com.example.domain.Topping;
+import com.example.repository.CommentRepository;
 import com.example.repository.ItemRepository;
 import com.example.repository.ToppingRepository;
 
@@ -25,6 +27,9 @@ public class ShowItemDetailService {
 	@Autowired
 	private ToppingRepository toppingRepository;
 	
+	@Autowired
+	private CommentRepository commentRepository;
+	
 	/**
 	 * 商品詳細情報を取得する.
 	 * 
@@ -35,7 +40,8 @@ public class ShowItemDetailService {
 		Item item = itemRepository.load(id);
 		List<Topping> toppingList = toppingRepository.findAll();
 		item.setToppingList(toppingList);
-		
+		List<Comment> commentList = commentRepository.findByItemId(id);
+		item.setCommentList(commentList);
 		return item;
 	}
 	
