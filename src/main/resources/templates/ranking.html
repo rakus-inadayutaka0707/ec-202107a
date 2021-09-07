@@ -47,7 +47,7 @@
 					<tbody class="pagination itemListNoodle">
 
 						<tr th:each="orderItem,status:${orderItemList}">
-							<th th:text="${status.count}+ 位"></th>
+							<th th:text="${status.count}+ 位" style="color:#FF0000"></th>
 							<th><a href="item_detail.html" th:href="@{'/show-item-detail?id=' + ${orderItem.item.id}}">
 									<img th:src="@{/img_noodle/}+${orderItem.item.imagePath}"
 										class="img-responsive img-rounded item-img-center" width="200" height="600">
