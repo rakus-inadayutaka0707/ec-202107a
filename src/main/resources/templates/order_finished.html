@@ -8,6 +8,7 @@
 	<title>注文完了</title>
 	<link href="../static/css/bootstrap.css" rel="stylesheet">
 	<link th:href="@{/css/bootstrap.css}" href="../static/css/bootstrap.css" rel="stylesheet">
+	<link th:href="@{/css/test.css}" rel="stylesheet">
 	<link href="../static/css/piza.css" rel="stylesheet">
 	<!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -29,8 +30,8 @@
 					<p>お支払い先は、お送りしたメールに記載してありますのでご確認ください。</p>
 					<p>メールが届かない場合は「注文履歴」からご確認ください。</p>
 					<br>
-					<p>「<span th:text="${coupon.name}"></span>」クーポンを獲得しました</p>
-					<p>次回注文時<span th:text="${coupon.discount}"></span>円値引きします</p>
+					<p><span th:text="${coupon.name}" style="font-size:20px"></span>クーポンを獲得しました</p>
+					<p>次回注文時<span th:text="${coupon.discount}" style="font-size:20px"></span>円値引きします</p>
 				</div>
 			</div>
 		</div>
@@ -43,6 +44,9 @@
 						<input class="form-control btn btn-warning btn-block" type="submit" value="トップ画面を表示する">
 					</form>
 				</div>
+			</div><br><br>
+			<div class="scroll">
+			  <span><img th:src="@{/img/配達員.jpeg}"></span>
 			</div>
 		</div>
 	</div>
