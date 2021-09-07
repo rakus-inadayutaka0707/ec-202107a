@@ -76,6 +76,24 @@ insert into toppings values(16, '大トロチャーシュー', 200, 300);
 insert into toppings values(17, '太麺に変更', 200, 300);
 insert into toppings values(18, '追い飯', 200, 300);
 
+-- コメント
+drop table if exists comments cascade;
+
+create table comments (
+id serial primary key
+, name varchar(100)
+, content varchar(500)
+, item_id integer not null
+);
+
+insert into comments values(1, 'ラーメン太郎', 'ここのラーメン美味すぎる', 1);
+insert into comments values(2, 'ラーメン二郎', '星5つ!!', 1);
+insert into comments values(3, 'ラーメン三郎', 'ぼちぼち', 1);
+insert into comments values(4, 'ラーメン四郎', 'ここのラーメン美味すぎる', 1);
+insert into comments values(5, 'ラーメン五郎', '食べログだったら3.2くらいかな...', 1);
+insert into comments values(6, 'ラーメン六郎', 'ここのラーメン美味すぎる, 1);
+
+
 
 -- 注文
 drop table if exists orders cascade;
@@ -114,3 +132,4 @@ create table order_toppings (
   , topping_id integer not null
   , order_item_id integer not null
 ) ;
+
