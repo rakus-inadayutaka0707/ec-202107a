@@ -1,6 +1,10 @@
 package com.example.repository;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -22,6 +26,17 @@ public class OrderItemRepository {
 
 	@Autowired
 	private NamedParameterJdbcTemplate template;
+
+	/**
+	 * OrderItemsオブジェクトを生成するローマッパー.
+	 *
+	 */
+	private static final RowMapper<OrderItem> ORDER_ITEM_ROW_MAPPER = (rs, i) -> {
+		OrderItem orderItem = new OrderItem();
+		orderItem.setItemId(rs.getInt("item_id"));
+		orderItem.setCount(rs.getInt("count"));
+		return orderItem;
+	};
 
 	/**
 	 * 注文商品をショッピングカートに追加する.
@@ -59,5 +74,11 @@ public class OrderItemRepository {
 		SqlParameterSource param = new BeanPropertySqlParameterSource(orderItem);
 		String sql = "UPDATE order_items SET item_id=:itemId,order_id=:orderId,quantity=:quantity,size=:size WHERE id=:id;";
 		template.update(sql, param);
+	}
+
+	public List<OrderItem> count() {
+		String sql = "SELECT item_id,COUNT(item_id) FROM order_items GROUP BY item_id ORDER BY count(item_id) DESC;";
+		List<OrderItem> orderItemList = template.query(sql, ORDER_ITEM_ROW_MAPPER);
+		return orderItemList;
 	}
 }
