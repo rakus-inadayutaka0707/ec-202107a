@@ -139,7 +139,7 @@
 		</form>
 		</div>
 		
-<div  class="container2">
+	<div class="container2">
 		<form th:if="${session.user}!=null" th:action="@{/insert-comment}" method="post">
 			<input type="hidden" name="itemId" th:value="${item.id}"> <input
 				type="hidden" name="name" th:value="${session.user.name}"><br>
@@ -147,6 +147,7 @@
 			<br>
 			<button >投稿</button>
 		</form>
+		</div>
 		<hr>
 		<div th:each="comment:${item.commentList}">
 			ユーザー名:<span th:text="${comment.name}"></span><br>
@@ -157,7 +158,6 @@
 			</form>
 			<hr>
 		</div>
-	</div>
 	<!-- end container -->
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
