@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.example.domain.Order;
@@ -42,7 +43,16 @@ public class DecisionOrderService {
 			order.setStatus(2);
 		}
 		orderRepository.update(order);
+	}
 
+	/**
+	 * 注文完了メールを送信する.
+	 * 
+	 * @param form 入力された宛先情報
+	 * 
+	 */
+	@Async
+	public void sendMail(DecisionOrderForm form) {
 		SimpleMailMessage mailMessage = new SimpleMailMessage();
 		mailMessage.setFrom("bass.754522.9@gmail.com");
 		mailMessage.setTo(form.getDestinationEmail());

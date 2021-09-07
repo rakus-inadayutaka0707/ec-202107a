@@ -64,10 +64,11 @@
 							</div>
 							<div class="form-group">
 								<label for="inputZipcode">郵便番号:</label>
+															(例：XXXXXXX)
 								<label
 									class="control-label" style="color: red" for="inputError"
 									th:if="${#fields.hasErrors('zipcode')}" th:errors="*{zipcode}">郵便番号を入力してください</label>
-									<input type="button" id="search" value="住所検索">
+						<input type="button" id="search" value="住所検索">
 								<input type="text" name="zipcode" id="inputZipcode" class="form-control"
 									placeholder="Zipcode" th:field="*{zipcode}">
 								
@@ -81,7 +82,7 @@
 									placeholder="Address" th:field="*{address}">
 							</div>
 							<div class="form-group">
-								<label for="inputTel">電話番号:</label>
+								<label for="inputTel">電話番号:</label>(例：XXX-XXXX-XXXX)
 								<label
 									class="control-label" style="color: red" for="inputError"
 									th:if="${#fields.hasErrors('telephone')}" th:errors="*{telephone}">電話番号を入力してください</label>
