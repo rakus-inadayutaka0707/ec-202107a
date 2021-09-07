@@ -104,6 +104,7 @@ public class DecisionOrderController {
 		if (difference < 10800000) {
 			Order order = decisionOrderService.load(orderId);
 			model.addAttribute("order", order);
+			model.addAttribute("coupon",coupon);
 			result.rejectValue("deliveryTime", "", "今から3時間後の日時をご入力ください");
 			return "order_confirm";
 		}
