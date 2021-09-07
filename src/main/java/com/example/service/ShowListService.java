@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import com.example.domain.Comment;
 import com.example.domain.Item;
 import com.example.repository.CommentRepository;
 import com.example.repository.ItemRepository;

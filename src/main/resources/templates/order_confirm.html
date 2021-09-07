@@ -191,189 +191,100 @@
 															th:if="${#fields.hasErrors('deliveryTime')}"
 															th:errors="*{deliveryTime}">dummy</label>
 													</div>
-
-												</td>
-												<td>
-													<label class="control-label" style="color: red" for="inputError"
-														th:if="${#fields.hasErrors('destinationName')}" th:errors="*{destinationName}" >名前を入力してください</label><br>
-								<input type="text" name="destinationName" id="inputDestinationName" th:field="*{destinationName}">
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<div class="text-center">
-															メールアドレス
-														</div>
-													</td>
-													<td>
-														<label class="control-label" style="color: red" for="inputError" th:if="${#fields.hasErrors('destinationEmail')}" th:errors="*{destinationEmail}" >
-														メールアドレスを入力してください</label><br>
-								<input type="text" name="destinationEmail" id="inputdestinationEmail" th:field="*{destinationEmail}">
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<div class="text-center">
-															郵便番号<br>
-															(例：XXX-XXXX)
-														</div>
-													</td>
-													<td>
-														<label class="control-label" style="color: red" for="inputError"
-															th:if="${#fields.hasErrors('destinationZipcode')}" th:errors="*{destinationZipcode}">郵便番号を入力してください</label><br>
-								<input type="text" name="destinationZipcode" id="inputDestinationZipcode" th:field="*{destinationZipcode}">&nbsp;&nbsp;<button id="search" type="button">住所検索</button>
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<div class="text-center">
-															住所
-														</div>
-													</td>
-													<td>
-														<label class="control-label" style="color: red" for="inputError"
-															th:if="${#fields.hasErrors('destinationAddress')}" th:errors="*{destinationAddress}" >住所を入力してください</label><br>
-								<input type="text" name="destinationAddress" id="inputDestinationAddress" th:field="*{destinationAddress}">
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<div class="text-center">
-															電話番号<br>
-															(例：XXX-XXXX-XXXX)
-														</div>
-													</td>
-													<td>
-														<label class="control-label" style="color: red" for="inputError"
-															th:if="${#fields.hasErrors('destinationTel')}" th:errors="*{destinationTel}" >電話番号を入力してください</label><br>
-								<input type="text" name="destinationTel" id="inputDestinationTel" th:field="*{destinationTel}">
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<div class="text-center">
-															配達日時
-														</div>
-													</td>
-													<td>
-														<div class="form-group">
-															<div class="row">
-																<div class="col-sm-12">
-																	<label class="control-label" style="color: red" for="inputError"
-															th:if="${#fields.hasErrors('deliveryTimeDate')}" th:errors="*{deliveryTimeDate}" ></label>
-															<label class="control-label" style="color: red" for="inputError"
-															th:if="${#fields.hasErrors('deliveryTime')}" th:errors="*{deliveryTime}" >dummy</label><br>
-																</div>
-																<div class="col-sm-5">
-																	<input type="date" name="deliveryTimeDate" id="deliveryTimeDate" th:field="*{deliveryTimeDate}"
-																		class="form-control input-sm" />
-																</div>
-
-															</div>
-															<div class="row">
-																<div class="col-sm-12">
-																	<label class="radio-inline">
-																		<input type="radio" name="deliveryTimeHour" value="10:00:00"checked="checked">
-																		10時
-																	</label>
-																	<label class="radio-inline">
-																		<input type="radio" name="deliveryTimeHour" value="11:00:00">
-																		11時
-																	</label>
-																	<label class="radio-inline">
-																		<input type="radio" name="deliveryTimeHour" value="12:00:00">
-																		12時
-																	</label><br>
-																	<label class="radio-inline">
-																		<input type="radio" name="deliveryTimeHour" value="13:00:00">
-																		13時
-																	</label>
-																	<label class="radio-inline">
-																		<input type="radio" name="deliveryTimeHour" value="14:00:00">
-																		14時
-																	</label>
-																	<label class="radio-inline">
-																		<input type="radio" name="deliveryTimeHour" value="15:00:00">
-																		15時
-																	</label><br>
-																	<label class="radio-inline">
-																		<input type="radio" name="deliveryTimeHour" value="16:00:00">
-																		16時
-																	</label>
-																	<label class="radio-inline">
-																		<input type="radio" name="deliveryTimeHour" value="17:00:00">
-																		17時
-																	</label>
-																	<label class="radio-inline">
-																		<input type="radio" name="deliveryTimeHour" value="18:00:00">
-																		18時
-																	</label><br>
-																</div>
-															</div>
-														</div>
-													</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-
-								<!-- table -->
-								<div class="row">
-									<div
-										class="table-responsive col-lg-offset-3 col-lg-6 col-md-offset-1 col-md-10 col-sm-10 col-xs-12">
-										<h3 class="text-center">お支払い方法</h3>
-										<table class="table table-striped item-list-table">
-											<tbody>
-												<tr>
-													<td>
-														<div class="text-center">
-															代金引換
-														</div>
-													</td>
-													<td>
-														<div class="row">
-															<div class="col-sm-12">
-																<label class="radio-inline">
-																	<input type="radio" name="paymentMethod" value="1"
-																		checked="checked">
-																	代金引換
-																</label>
-															</div>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<div class="text-center">
-															クレジットカード決済
-														</div>
-													</td>
-													<td align="center">
-														<div class="row">
-															<div class="col-sm-12">
-																<label class="radio-inline">
-																	<input type="radio" name="paymentMethod" value="1">
-																	クレジットカード
-																</label><br><br>
-															</div>
-														</div>
-													</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-xs-offset-4 col-xs-4">
-										<div class="form-group">
-										<input type="hidden" name="orderId" th:value="${order.id}">
-											<input class="form-control btn btn-warning btn-block" type="submit"
-												value="この内容で注文する">
-										</div>
-									</div>
-								</div>
-							</form>						
+													<div class="col-sm-7">
+														<input type="date" name="deliveryTimeDate" id="deliveryTimeDate"
+															th:field="*{deliveryTimeDate}" class="form-control" />
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-sm-12">
+														<label class="radio-inline">
+															<input type="radio" name="deliveryTimeHour" value="10:00:00"
+																checked="checked">
+															10時
+														</label>
+														<label class="radio-inline">
+															<input type="radio" name="deliveryTimeHour"
+																value="11:00:00">
+															11時
+														</label>
+														<label class="radio-inline">
+															<input type="radio" name="deliveryTimeHour"
+																value="12:00:00">
+															12時
+														</label><br>
+														<label class="radio-inline">
+															<input type="radio" name="deliveryTimeHour"
+																value="13:00:00">
+															13時
+														</label>
+														<label class="radio-inline">
+															<input type="radio" name="deliveryTimeHour"
+																value="14:00:00">
+															14時
+														</label>
+														<label class="radio-inline">
+															<input type="radio" name="deliveryTimeHour"
+																value="15:00:00">
+															15時
+														</label><br>
+														<label class="radio-inline">
+															<input type="radio" name="deliveryTimeHour"
+																value="16:00:00">
+															16時
+														</label>
+														<label class="radio-inline">
+															<input type="radio" name="deliveryTimeHour"
+																value="17:00:00">
+															17時
+														</label>
+														<label class="radio-inline">
+															<input type="radio" name="deliveryTimeHour"
+																value="18:00:00">
+															18時
+														</label>
+													</div>
+												</div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="text-center">
+												代金引換
+											</div>
+										</td>
+										<td>
+											<div class="row">
+												<div class="col-sm-12">
+													<label class="radio-inline">
+														<input type="radio" name="paymentMethod" value="1"
+															checked="checked">
+														代金引換
+													</label>
+													<label class="radio-inline">
+														<input type="radio" name="paymentMethod" value="1">
+														クレジットカード
+													</label>
+												</div>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-offset-4 col-xs-4">
+							<div class="form-group">
+								<input type="hidden" name="orderId" th:value="${order.id}">
+								<input class="form-control btn btn-warning btn-block" type="submit" value="この内容で注文する">
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
 		</div>
 			<!-- end container -->
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

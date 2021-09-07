@@ -11,9 +11,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.domain.Coupon;
 import com.example.domain.Order;
 import com.example.domain.User;
 import com.example.form.ShoppingCartForm;
+import com.example.service.CouponService;
 import com.example.service.ShoppingCartService;
 
 /**
@@ -28,6 +30,9 @@ public class ShoppingCartController {
 
 	@Autowired
 	private ShoppingCartService shoppingCartService;
+
+	@Autowired
+	private CouponService couponService;
 
 	@Autowired
 	private ShoppingCartForm setUpShoppingCartForm() {
@@ -46,15 +51,17 @@ public class ShoppingCartController {
 	@RequestMapping("")
 	public String showItemShoppingCart(Model model) {
 		User user = null;
-		if(session.getAttribute("user") != null) {
-			user = (User) session.getAttribute("user");	
-		}else if(session.getAttribute("temporalUserId") != null) {
+		if (session.getAttribute("user") != null) {
+			user = (User) session.getAttribute("user");
+		} else if (session.getAttribute("temporalUserId") != null) {
 			user = (User) session.getAttribute("temporalUserId");
-		}else {
+		} else {
 			user = new User();
 			user.setId(0);
 		}
 		Order order = shoppingCartService.showItemShoppingCart(user.getId());
+		Coupon coupon = couponService.searchByUserHaveCoupon(user.getId());
+		model.addAttribute("coupon", coupon);
 		model.addAttribute("order", order);
 		return "cart_list";
 	}
@@ -72,11 +79,11 @@ public class ShoppingCartController {
 			return "item_detail";
 		}
 		User user = null;
-		if(session.getAttribute("user") != null) {
-			user = (User) session.getAttribute("user");	
-		}else if(session.getAttribute("temporalUserId") != null) {
+		if (session.getAttribute("user") != null) {
+			user = (User) session.getAttribute("user");
+		} else if (session.getAttribute("temporalUserId") != null) {
 			user = (User) session.getAttribute("temporalUserId");
-		}else {
+		} else {
 			user = new User();
 			Random random = new Random();
 			user.setId(random.nextInt(99999999) + 5000);
@@ -96,7 +103,7 @@ public class ShoppingCartController {
 	public String deleteItemShoppingCart(int orderItemId) {
 		shoppingCartService.deleteItemShoppingCart(orderItemId);
 		try {
-			Thread. sleep(400);
+			Thread.sleep(400);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
