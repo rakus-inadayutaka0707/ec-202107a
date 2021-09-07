@@ -30,6 +30,12 @@
   margin-right: auto;
 }
 
+.itemButton {
+	width: 15%;
+	margin: auto;
+}
+
+
 
 /* スクロールアニメーションで使用 */
 .scroll {

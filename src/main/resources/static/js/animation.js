@@ -6,7 +6,7 @@ $(function () {
     if (code === '') {
       $('.notSearchAnimation').addClass('animate__animated animate__rubberBand')
     } else {
-      $('.searchAnimation').addClass('animate__animated animate__zoomOutUp')
+      $('.searchAnimation').addClass('animate__animated animate__bounceOutUp')
     }
   })
 

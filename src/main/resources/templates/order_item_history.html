@@ -93,15 +93,15 @@
 				<div class="form-group text-center">
 					<span>ご注文金額合計：</span><span id="total-price" style="font-size:35px"
 						th:text="${#numbers.formatInteger(order.totalPrice,0,'COMMA')}">38,000</span><span>円 (税込)</span><br>
-					<span th:if="${coupon.discount} != 0" th:text="'※クーポンで'+${coupon.discount}+'円割引割り引ぎ後の値段'"></span>
+					<span th:if="${coupon.discount} != 0" th:text="'※クーポンで'+${coupon.discount}+'円割引割り引き後の値段'"></span>
 				</div>
 			</div>
 		</div>
 
 		<div class="row">
-			<div class="col-xs-offset-5 col-xs-3">
+			<div class="itemButton">
 				<div class="form-group">
-					<form action="order_confirm.html"　th:action="@{/order-history}">
+					<form action="order_confirm.html" th:action="@{/order-history}">
 						<input class="form-control btn btn-warning btn-block" type="submit" value="注文履歴に戻る">
 					</form>
 				</div>
