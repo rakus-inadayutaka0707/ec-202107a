@@ -21,6 +21,16 @@ public class User {
 	private String address;
 	/** 電話番号 */
 	private String telephone;
+	/** クーポンリスト */
+	private Coupon couponList;
+
+	public Coupon getCouponList() {
+		return couponList;
+	}
+
+	public void setCouponList(Coupon couponList) {
+		this.couponList = couponList;
+	}
 
 	public Integer getId() {
 		return id;
@@ -81,6 +91,6 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", zipcode="
-				+ zipcode + ", address=" + address + ", telephone=" + telephone + "]";
+				+ zipcode + ", address=" + address + ", telephone=" + telephone + ", couponList=" + couponList + "]";
 	}
 }

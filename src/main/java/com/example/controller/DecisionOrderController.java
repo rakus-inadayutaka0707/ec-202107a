@@ -5,6 +5,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Controller;
@@ -13,9 +15,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.domain.Coupon;
 import com.example.domain.Order;
+import com.example.domain.User;
 import com.example.form.DecisionOrderForm;
+import com.example.service.CouponService;
 import com.example.service.DecisionOrderService;
 
 /**
@@ -31,6 +37,12 @@ public class DecisionOrderController {
 
 	@Autowired
 	private DecisionOrderService decisionOrderService;
+
+	@Autowired
+	private CouponService couponService;
+
+	@Autowired
+	private HttpSession session;
 
 	@ModelAttribute
 	public DecisionOrderForm setUpDecisionOrderForm() {
@@ -58,10 +70,17 @@ public class DecisionOrderController {
 	 * @return 注文完了画面
 	 */
 	@RequestMapping("")
-	public String DecisionOrder(@Validated DecisionOrderForm form, BindingResult result, Integer orderId, Model model) {
+	public String DecisionOrder(@Validated DecisionOrderForm form, BindingResult result, Integer orderId, Model model, RedirectAttributes redirectAttributes) {
+		User user = (User) session.getAttribute("user");
+		Coupon coupon = couponService.searchByUserHaveCoupon(user.getId());
+		if(coupon.getId() != null) {
+			couponService.updateCoupon(coupon, orderId);
+		}
+		
 		if (result.hasErrors()) {
 			Order order = decisionOrderService.load(orderId);
 			model.addAttribute("order", order);
+			model.addAttribute("coupon",coupon);
 			return toConfirmOrder();
 		}
 
@@ -91,8 +110,12 @@ public class DecisionOrderController {
 
 		Calendar calendar = Calendar.getInstance();
 		form.setOrderDate(calendar.getTime());
-		decisionOrderService.DecisionOrder(form);
+		decisionOrderService.DecisionOrder(form, coupon);
 		decisionOrderService.sendMail(form);
+
+		coupon = couponService.insertCoupon(user.getId());
+		redirectAttributes.addFlashAttribute("coupon", coupon);
+		
 		return "redirect:/decisionorder/toOrderFinished";
 	}
 

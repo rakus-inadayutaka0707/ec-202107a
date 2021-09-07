@@ -8,6 +8,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import com.example.domain.Coupon;
 import com.example.domain.Order;
 import com.example.form.DecisionOrderForm;
 import com.example.repository.OrderRepository;
@@ -33,7 +34,7 @@ public class DecisionOrderService {
 	 * @param form 入力された宛先情報
 	 * 
 	 */
-	public void DecisionOrder(DecisionOrderForm form) {
+	public void DecisionOrder(DecisionOrderForm form, Coupon coupon) {
 		Order order = orderRepository.load(form.getOrderId());
 		BeanUtils.copyProperties(form, order);
 		if (order.getPaymentMethod() == 1) {
@@ -42,6 +43,8 @@ public class DecisionOrderService {
 		if (order.getPaymentMethod() == 2) {
 			order.setStatus(2);
 		}
+		System.out.println(coupon.getDiscount());
+		order.setTotalPrice(order.getTotalPrice() - coupon.getDiscount() + order.getTotalPrice() / 10);
 		orderRepository.update(order);
 	}
 
