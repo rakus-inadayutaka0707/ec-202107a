@@ -23,7 +23,9 @@ public class OrderItem {
 	private Item item;
 	/** トッピングのリスト */
 	private List<OrderTopping> orderToppingList;
-	
+	/** 注文された回数 */
+	private Integer count;
+
 	public void setCharSize(String size) {
 		this.size = size.charAt(0);
 	}
@@ -88,5 +90,13 @@ public class OrderItem {
 	public String toString() {
 		return "OrderItem [id=" + id + ", itemId=" + itemId + ", orderId=" + orderId + ", quantity=" + quantity
 				+ ", size=" + size + ", item=" + item + ", orderToppingList=" + orderToppingList + "]";
+	}
+
+	public Integer getCount() {
+		return count;
+	}
+
+	public void setCount(Integer count) {
+		this.count = count;
 	}
 }
