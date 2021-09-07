@@ -88,6 +88,18 @@
 						</tr>
 					</tbody>
 				</table>
+				
+				<div class="row" th:if="${order.totalPrice} != 0">
+			<div class="col-xs-offset-2 col-xs-8">
+				<div class="form-group text-center">
+				
+					<span th:if="${coupon.discount} != 0" th:text="'クーポン割引価格:'+${coupon.discount}+'円割引　※税込み価格から割引'"></span><br>
+					<span>ご注文金額合計：</span><span id="total-price" style="font-size:35px"
+						th:text="${#numbers.formatInteger(order.totalPrice - coupon.discount + order.totalPrice / 10,0,'COMMA')}">38,000</span><span>円
+						(税込)</span>
+				</div>
+			</div>
+		</div>
 
 				<!-- table -->
 				<form method="post" action="order_finished.html" th:action="@{/decisionorder}"

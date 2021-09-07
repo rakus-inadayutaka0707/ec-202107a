@@ -9,10 +9,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.domain.Coupon;
 import com.example.domain.Order;
 import com.example.domain.User;
 import com.example.form.DecisionOrderForm;
 import com.example.service.ConfirmOrderService;
+import com.example.service.CouponService;
 import com.example.service.LoginCheckService;
 import com.example.service.ShoppingCartService;
 
@@ -35,6 +37,9 @@ public class ConfirmOrderController {
 
 	@Autowired
 	private ShoppingCartService shoppingCartService;
+	
+	@Autowired
+	private CouponService couponService;
 
 	@ModelAttribute
 	public DecisionOrderForm setUpDecisionOrderForm() {
@@ -67,6 +72,8 @@ public class ConfirmOrderController {
 		Order order = confirmOrderService.confirmOrder(Integer.parseInt(orderId));
 		order.setUser((User) session.getAttribute("user"));
 		session.removeAttribute("orderId");
+		Coupon coupon = couponService.searchByUserHaveCoupon(order.getUserId());
+		model.addAttribute("coupon", coupon);
 		model.addAttribute("order", order);
 		return "order_confirm";
 	}

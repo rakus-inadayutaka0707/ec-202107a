@@ -114,3 +114,16 @@ create table order_toppings (
   , topping_id integer not null
   , order_item_id integer not null
 ) ;
+
+-- クーポン
+drop table if exists coupons cascade;
+
+create table coupons (
+ id serial primary key
+ , name varchar(30) not null
+ , code varchar(30) not null
+ , discount integer not null
+ , user_id integer not null
+ , order_id integer
+ , deleted boolean default false not null
+) ;
