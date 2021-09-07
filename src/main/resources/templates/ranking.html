@@ -20,61 +20,43 @@
 	<div class="container">
 		<span th:insert="include::frag_header"></span>
 
-		<!-- search form -->
-		<div class="row">
-			<div class="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 col-sm-10 col-xs-12">
-				<div class="panel panel-default notSearchAnimation">
-					<div class="panel-heading">
-						<div class="panel-title">商品を検索する</div>
-					</div>
-					<div class="panel-body">
-						<form method="post" th:action="@{/}" class="form-horizontal">
-							<div class="form-group">
-								<label for="code" class="control-label col-sm-2">商品名</label>
-								<div th:if="${emptyMessage}" th:text="${emptyMessage}"></div>
-								<div class="col-sm-9">
-									<input type="text" name="name" id="code" class="form-control input-sm searchAnimation" />
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="code" class="control-label col-sm-5">並べ替え</label>
-								<div th:if="${emptyMessage}" th:text="${emptyMessage}"></div>
-								<div class="col-sm-4">
-									<select name="sortDisplay" id="sortDisplay" class="form-control">
-										<option value="row" th:selected="${sort} == 'row'">料金低い順</option>
-										<option value="high" th:selected="${sort} == 'desc'">料金高い順</option>
-									</select>
-								</div>
-							</div>
-							<div class="text-center">
-								<button type="submit" value="検索" class="btn btn-primary" id="search">検索</button>
-								<button type="reset" value="クリア" class="btn btn-default">クリア</button>
-							</div>
-
-						</form>
-					</div>
-				</div>
-			</div>
+		<div align="center">
+			<font style="font-family:'ＭＳ Ｐゴシック',Osaka,sans-serif;font-size:260%;font-weight:bold;">
+				<font style="color:#6565FF">T</font>
+				<font style="color:#735CE8">h</font>
+				<font style="color:#7A57DC">e</font>
+				<font style="color:#9645AE">N</font>
+				<font style="color:#9D40A2">o</font>
+				<font style="color:#A43C97">o</font>
+				<font style="color:#AB378B">d</font>
+				<font style="color:#B23380">l</font>
+				<font style="color:#B92E74">e</font>
+				<font style="color:#D51C46">R</font>
+				<font style="color:#DC173A">a</font>
+				<font style="color:#E3122E">n</font>
+				<font style="color:#EA0E23">k</font>
+				<font style="color:#F10917">i</font>
+				<font style="color:#F8050C">n</font>
+				<font style="color:#FF0000">g</font>
+			</font>
 		</div>
-
 		<!-- table -->
 		<div class="row">
 			<div class="table-responsive col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-sm-10 col-xs-12">
 				<table class="table table-striped item-list-table">
 					<tbody class="pagination itemListNoodle">
-						<tr th:each="itemList :${itemListRow}">
-							<th th:each="item : ${itemList}" class="itemNoodle">
-								<a href="item_detail.html" th:href="@{'/show-item-detail?id=' + ${item.id}}">
-									<img th:src="@{/img_noodle/}+${item.imagePath}"
+
+						<tr th:each="orderItem,status:${orderItemList}">
+							<th th:text="${status.count}+ 位"></th>
+							<th><a href="item_detail.html" th:href="@{'/show-item-detail?id=' + ${orderItem.item.id}}">
+									<img th:src="@{/img_noodle/}+${orderItem.item.imagePath}"
 										class="img-responsive img-rounded item-img-center" width="200" height="600">
 								</a><br>
-								<a href="item_detail.html" th:text="${item.name}"
-									th:href="@{'/show-item-detail?id=' + ${item.id}}">じゃがバターベーコン</a><br>
-								<span class="price">&nbsp;M&nbsp;</span>&nbsp;&nbsp;
-								<span th:text="${#numbers.formatInteger(item.priceM,0,'COMMA')}"></span>円(税抜)<br>
-								<span class="price">&nbsp;Ｌ&nbsp;</span>&nbsp;&nbsp;
-								<span th:text="${#numbers.formatInteger(item.priceL,0,'COMMA')}"></span>円(税抜)<br>
+								<a href="item_detail.html" th:text="${orderItem.item.name}"
+									th:href="@{'/show-item-detail?id=' + ${orderItem.item.id}}">じゃがバターベーコン</a>
 							</th>
+							<th th:text="${orderItem.item.description}"></th>
+
 						</tr>
 					</tbody>
 				</table>

@@ -11,7 +11,7 @@ import com.example.domain.OrderItem;
 import com.example.service.RankingService;
 
 @Controller
-@RequestMapping("ranking")
+@RequestMapping("/ranking")
 public class RankingController {
 
 	@Autowired
@@ -21,7 +21,9 @@ public class RankingController {
 	public String ranking(Model model) {
 		List<OrderItem> orderItemList = rankingService.ranking();
 		model.addAttribute("orderItemList", orderItemList);
-		System.out.println(orderItemList);
+		for (OrderItem a : orderItemList) {
+			System.out.println(a);
+		}
 		return "ranking";
 	}
 
