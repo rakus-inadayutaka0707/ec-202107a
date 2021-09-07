@@ -65,7 +65,7 @@ public class OrderHistoryController {
 			redirectAttributes.addFlashAttribute("error", "検索した注文が見つかりませんでした。");
 			return "redirect:/order-history";
 		}
-		Coupon coupon = couponService.searchByUserHaveCoupon(user.getId());
+		Coupon coupon = couponService.searchByOrderUseCoupon(order.getId());
 		model.addAttribute("coupon", coupon);
 		model.addAttribute("order", order);
 		return "order_item_history";

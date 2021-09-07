@@ -46,6 +46,22 @@ public class CouponRepository {
 	}
 
 	/**
+	 * オーダーで使用したクーポンを取得.
+	 * 
+	 * @param orderId オーダーID
+	 * @return 取得したクーポン情報
+	 */
+	public Coupon findByOrderId(Integer orderId) {
+		String sql = "SELECT id,name,code,discount,user_id,order_id,deleted FROM coupons WHERE order_id = :orderId AND deleted = true;";
+		SqlParameterSource param = new MapSqlParameterSource().addValue("orderId", orderId);
+		List<Coupon> couponList = template.query(sql, param, COUPON_ROW_MAPPER);
+		if (couponList.size() == 0) {
+			return null;
+		}
+		return couponList.get(0);
+	}
+
+	/**
 	 * クーポンを主キー検索する.
 	 * 
 	 * @param id 検索するID

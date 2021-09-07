@@ -45,7 +45,7 @@ public class CouponService {
 		Random random = new Random();
 		Coupon coupon = new Coupon();
 		int randomNum = random.nextInt(100) + 1;
-		if(0 < randomNum && randomNum <= 80) {
+		if (0 < randomNum && randomNum <= 80) {
 			coupon.setName("50円OFF");
 			coupon.setDiscount(50);
 		} else if (80 < randomNum && randomNum <= 90) {
@@ -71,5 +71,20 @@ public class CouponService {
 		coupon.setOrderId(orderId);
 		coupon.setDeleted(true);
 		couponRepository.update(coupon);
+	}
+
+	/**
+	 * オーダーで使用したクーポンを取得.
+	 * 
+	 * @param orderId オーダーID
+	 * @return 取得したクーポン情報
+	 */
+	public Coupon searchByOrderUseCoupon(Integer orderId) {
+		Coupon coupon = couponRepository.findByOrderId(orderId);
+		if (coupon == null) {
+			coupon = new Coupon();
+			coupon.setDiscount(0);
+		}
+		return coupon;
 	}
 }
