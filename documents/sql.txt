@@ -91,7 +91,7 @@ insert into comments values(2, 'ラーメン二郎', '星5つ!!', 1);
 insert into comments values(3, 'ラーメン三郎', 'ぼちぼち', 1);
 insert into comments values(4, 'ラーメン四郎', 'ここのラーメン美味すぎる', 1);
 insert into comments values(5, 'ラーメン五郎', '食べログだったら3.2くらいかな...', 1);
-insert into comments values(6, 'ラーメン六郎', 'ここのラーメン美味すぎる, 1);
+insert into comments values(6, 'ラーメン六郎', 'ここのラーメン美味すぎる', 1);
 
 
 
