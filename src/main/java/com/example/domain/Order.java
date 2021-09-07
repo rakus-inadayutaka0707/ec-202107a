@@ -39,6 +39,16 @@ public class Order {
 	private User user;
 	/** ショッピングカートのアイテムリスト */
 	private List<OrderItem> orderItemList;
+	/** クーポンID */
+	private Integer couponId;
+
+	public Integer getCouponId() {
+		return couponId;
+	}
+
+	public void setCouponId(Integer couponId) {
+		this.couponId = couponId;
+	}
 
 	public Integer getId() {
 		return id;
@@ -158,6 +168,7 @@ public class Order {
 				+ ", orderDate=" + orderDate + ", destinationName=" + destinationName + ", destinationEmail="
 				+ destinationEmail + ", destinationZipcode=" + destinationZipcode + ", destinationAddress="
 				+ destinationAddress + ", destinationTel=" + destinationTel + ", deliveryTime=" + deliveryTime
-				+ ", paymentMethod=" + paymentMethod + ", user=" + user + ", orderItemList=" + orderItemList + "]";
+				+ ", paymentMethod=" + paymentMethod + ", user=" + user + ", orderItemList=" + orderItemList
+				+ ", couponId=" + couponId + "]";
 	}
 }
