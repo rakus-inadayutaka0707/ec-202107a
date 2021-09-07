@@ -93,8 +93,6 @@ insert into comments values(4, 'ラーメン四郎', 'ここのラーメン美�
 insert into comments values(5, 'ラーメン五郎', '食べログだったら3.2くらいかな...', 1);
 insert into comments values(6, 'ラーメン六郎', 'ここのラーメン美味すぎる', 1);
 
-
-
 -- 注文
 drop table if exists orders cascade;
 
