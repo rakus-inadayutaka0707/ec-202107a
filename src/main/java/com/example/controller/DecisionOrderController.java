@@ -48,12 +48,22 @@ public class DecisionOrderController {
 	public DecisionOrderForm setUpDecisionOrderForm() {
 		return new DecisionOrderForm();
 	}
-
+	
+	/**
+	 * 注文確認画面に遷移する.
+	 * 
+	 * @return 注文確認画面
+	 */
 	@RequestMapping("/toConfirmOrder")
 	public String toConfirmOrder() {
 		return "order_confirm";
 	}
 
+	/**
+	 * 注文完了画面に遷移する.
+	 * 
+	 * @return 注文完了画面
+	 */
 	@RequestMapping("/toOrderFinished")
 	public String toOrderFinished() {
 		return "order_finished";
