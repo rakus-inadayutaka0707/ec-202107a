@@ -247,6 +247,12 @@ public class OrderRepository {
 		template.update(updateSql, param);
 	}
 	
+	
+	/**
+	 * オーダーを削除する.
+	 * 
+	 * @param id 削除するオーダー
+	 */
 	public void delete(Integer id) {
 		String sql = "DELETE FROM orders WHERE id=:id;";
 		SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);

@@ -14,29 +14,32 @@ import com.example.service.ShowItemDetailService;
 @RequestMapping("/delete-comment")
 public class DeleteCommentController {
 
-	
 	@Autowired
 	private DeleteCommentService deleteCommentService;
-	
+
 	@Autowired
 	private ShowItemDetailService showItemDetailService;
-	
+
 	@Autowired
 	private HttpSession session;
-	
+
+	/**
+	 * コメントを削除する.
+	 * 
+	 * @param commentId コメントID
+	 * @param itemId    商品ID
+	 * @return 商品詳細画面
+	 */
 	@RequestMapping("")
-	public String deleteComment(Integer commentId,Integer itemId) {
-		
+	public String deleteComment(Integer commentId, Integer itemId) {
+
 		deleteCommentService.deleteByCommentId(commentId);
-		
-		
+
 		Item item = showItemDetailService.showItemDetail(itemId);
-		session.setAttribute("item",item);
-		
+		session.setAttribute("item", item);
+
 		return "redirect:/show-item-detail";
-		
-		
+
 	}
-	
-	
+
 }

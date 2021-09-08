@@ -16,7 +16,14 @@ public class RankingController {
 
 	@Autowired
 	private RankingService rankingService;
+	
 
+	/**
+	 * ランキングページを表示する.
+	 * 
+	 * @param model リクエストスコープ
+	 * @return ランキングページ
+	 */
 	@RequestMapping("")
 	public String ranking(Model model) {
 		List<OrderItem> orderItemList = rankingService.ranking();
