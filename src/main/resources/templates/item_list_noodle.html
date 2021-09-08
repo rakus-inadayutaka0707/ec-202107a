@@ -9,6 +9,8 @@
 	<link th:href="@{/css/bootstrap.css}" rel="stylesheet">
 	<link th:href="@{/css/noodle.css}" rel="stylesheet">
 	<link th:href="@{/css/button.css}" rel="stylesheet">
+	<link th:href="@{/css/cursor.css}" rel="stylesheet">
+	<link th:href="@{/css/cursor.css}" rel="stylesheet">
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css">
 	<!--[if lt IE 9]>
@@ -20,6 +22,7 @@
 <body>
 	<div class="container">
 		<span th:insert="include::frag_header"></span>
+		<div class="cursor"></div>
 
 		<!-- search form -->
 		<div class="row">
@@ -59,7 +62,8 @@
 			</div>
 		</div>
 		<form align="center" th:action="@{/ranking}" class="form-horizontal">
-			<button class="btn btn-radius-solid btn--shadow">ランキングページはこちら<i class="fas fa-angle-right fa-position-right"></i></button>
+			<button class="btn btn-radius-solid btn--shadow">ランキングページはこちら<i
+					class="fas fa-angle-right fa-position-right"></i></button>
 		</form>
 		<!-- table -->
 		<div class="row">
